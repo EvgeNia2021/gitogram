@@ -18,6 +18,10 @@
       </template>
     </headerBar>
   </div>
+  <div class="comment-section">
+  <feed />
+  </div>
+
 </template>
 
 <script>
@@ -25,13 +29,15 @@ import { headerBar } from '../../components/header-bar'
 import { userList } from '../../components/userList'
 import { icon } from '../../icons'
 import users from './data.json'
+import { feed } from '../../components/feed'
 
 export default {
   name: 'feeds',
   components: {
     headerBar,
     icon,
-    userList
+    userList,
+    feed
   },
   data () {
     return {

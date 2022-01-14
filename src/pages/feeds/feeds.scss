@@ -1,0 +1,12 @@
+.users-list {
+display: flex;
+justify-content: space-between;
+}
+.users-item {
+  margin-right: 43px;
+
+}
+.users-item:last-child {
+  margin-right: 0;
+}
+

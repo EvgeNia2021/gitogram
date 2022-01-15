@@ -2,8 +2,16 @@
   background: #FAFAFA;
   border-bottom: 1px solid #c6c6c8;
   padding: 47px 0 42px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .content {
   margin-top: 49px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
 }

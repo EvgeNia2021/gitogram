@@ -2,20 +2,25 @@
   display: inline-flex;
   align-items: center;
   padding: 0;
+  width: 100px;
+  justify-content: space-between;
 
 
-.icon {
+.toggler-icon {
   width: 10%;
   transform: rotate(180deg);
 }
 
 &.active {
-  .icon {
+  .toggler-icon {
     transform: rotate(0deg);
+   
   }
 }
 }
 
 .text {
   margin-right: 5px;
+  font-size: 14px;
+  font-weight: 500;
 }

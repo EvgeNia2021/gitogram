@@ -2,8 +2,17 @@
   <div class="header-bar">
     <headerBar>
       <template #header>
-        <icon name="home" />
-        <h1>Header</h1>
+        <div class="logo">   <icon name="logo" />
+        </div>
+        <div class="header-icons">
+          <div class="home">
+       <icon name="home" />
+     </div>
+  <div class="logout">
+       <icon name="logout" />
+     </div>
+     </div>
+
       </template>
       <template #content>
         <ul class="users-list">

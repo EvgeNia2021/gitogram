@@ -1,5 +1,8 @@
 <template>
   <div class="c-feed">
+    <div class="feed-user">
+    <div class="feed-username">John Doe</div>
+  </div>
     <toggler @onToggle="toggle" />
     <div class="comments" v-if="shown">
       <ul class="comments-list">
@@ -8,6 +11,9 @@
         </li>
       </ul>
     </div>
+  <div class="date">
+  <div>Random date</div>
+  </div>
   </div>
 </template>
 

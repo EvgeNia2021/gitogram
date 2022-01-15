@@ -9,4 +9,20 @@ justify-content: space-between;
 .users-item:last-child {
   margin-right: 0;
 }
+.logo {
+  width: 175px;
+  color: #292929;
+}
+.home {
+  width: 24px;
+  margin-right: 28px;
+}
+.logout {
+  width: 25px;
+}
 
+.header-icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

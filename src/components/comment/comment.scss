@@ -1,4 +1,16 @@
 .c-comment {
   display: flex;
-  
+  margin-bottom: 6px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.issues-username {
+  font-weight: 700;
+  font-size: 14px;
+  margin-right: 8px;
+}
+.issues-text {
+  font-weight: 400;
+  font-size: 14px;
 }

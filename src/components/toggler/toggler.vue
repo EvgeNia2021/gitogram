@@ -1,6 +1,6 @@
 <template>
   <button :class="['button', {'active': isOpened }]" @click="toggle">
-    <span class="text">{{ isOpened ? "Hide" : "Show" }} issues</span>
+    <span class="text">{{ isOpened ? "Hide" : "View" }} issues</span>
     <span class="toggler-icon">
       <icon name="toggleArrow" />
     </span>
@@ -23,7 +23,7 @@ export default {
   methods: {
     toggle () {
       this.isOpened = !this.isOpened
-      this.$emit('toggle', this.isOpened)
+      this.$emit('onToggle', this.isOpened)
     }
   }
 }

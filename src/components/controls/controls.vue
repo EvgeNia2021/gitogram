@@ -1,4 +1,5 @@
 <template>
+<div class="controls">
     <div class="controls__frame">
       <div class="controls__icon">
         <icon name="star" />
@@ -16,6 +17,7 @@
     </div>
     <div class="controls__frame">
       {{ fork }}
+    </div>
     </div>
 </template>
 

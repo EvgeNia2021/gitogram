@@ -3,9 +3,19 @@
     <li class="c-feed-item" v-for="(item, ndx) in 5" :key="ndx">
 
     <div class="feed-user">
-    <user :src="avatar_url" :name="username" />
+    <user :src="avatarUrl" :name="username" />
   </div>
-   <repoCard />
+  <repoCard>
+    <template #repoCard>
+   <h2 class="repo-title">Title</h2>
+    <div class="repo-info">
+      <p>Description</p>
+    </div>
+    <div class="repo-controls">
+      <controls :star="10" :fork="5" />
+    </div>
+    </template>
+     </repoCard>
     <toggler @onToggle="toggle" />
     <div class="comments" v-if="shown">
       <ul class="comments-list">
@@ -16,7 +26,7 @@
     </div>
 
   <div class="date">
-    {{ formatDate }}
+    random date
   </div>
 </li>
   </ul>
@@ -25,11 +35,10 @@
 <script>
 import { comment } from '../comment'
 import { toggler } from '../toggler'
-import { repoCard } from '@/components/repo-card'
+import { repoCard } from '../repo-card'
 import { user } from '../user'
 import { data } from '../../pages/feeds'
-
-// import { monthsList } from '../../miscellaneous/monthsList.js'
+import { controls } from '../controls'
 
 export default {
   name: 'feed-item',
@@ -37,7 +46,8 @@ export default {
     toggler,
     comment,
     repoCard,
-    user
+    user,
+    controls
   },
   data () {
     return {
@@ -50,7 +60,7 @@ export default {
     }
   },
   props: {
-    avatar_url: {
+    avatarUrl: {
       type: String,
       default: 'https://picsum.photos/300/300'
     },

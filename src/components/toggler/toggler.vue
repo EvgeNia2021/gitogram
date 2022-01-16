@@ -1,10 +1,12 @@
 <template>
+<div class="toggler">
   <button :class="['button', {'active': isOpened }]" @click="toggle">
     <span class="text">{{ isOpened ? "Hide" : "View" }} issues</span>
     <span class="toggler-icon">
       <icon name="toggleArrow" />
     </span>
   </button>
+  </div>
 </template>
 
 <script>

@@ -1,8 +1,9 @@
 <template>
   <div class="user">
-    <avatar class="user__avatar" :avatar="src" :size="size" />
+    <div class="user__avatar" :avatar="users.avatar" :size="size">
+      </div>
  <div>
-  <div class="user__name">{{ name }}</div>
+  <div class="user__name"  :username="users.username">{{ name }}</div>
   <div class="user__type">{{ type }}</div>
    </div>
     </div>
@@ -10,6 +11,7 @@
 
 <script>
 // import { avatar as avatar } from '../avatar';
+import users from '../../pages/feeds/data.json'
 export default {
   components: {
     // Avatar
@@ -34,6 +36,12 @@ export default {
   },
   setup (props) {
     return {}
+  },
+  data () {
+    return {
+      users
+    }
   }
 }
 </script>
+<style src="./user.scss" lang="scss" scoped></style>

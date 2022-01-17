@@ -4,7 +4,7 @@
   </div>
 </template>
 
-// <script>
+<script>
 // import { controls } from '../controls'
 // export default {
 //   components: {

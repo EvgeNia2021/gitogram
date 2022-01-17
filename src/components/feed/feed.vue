@@ -1,7 +1,4 @@
 <template>
-  <ul class="c-feed">
-    <li class="c-feed-item" v-for="(item, ndx) in 5" :key="ndx">
-
     <div class="feed-user">
     <user :src="avatarUrl" :name="username" />
   </div>
@@ -28,8 +25,7 @@
   <div class="date">
     random date
   </div>
-</li>
-  </ul>
+
 </template>
 
 <script>

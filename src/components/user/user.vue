@@ -1,20 +1,19 @@
 <template>
   <div class="user">
-    <div class="user__avatar" :avatar="users.avatar" :size="size">
-      </div>
+      <Avatar class="user__avatar" :avatar="src" :size="size" />
  <div>
-  <div class="user__name"  :username="users.username">{{ name }}</div>
+  <div class="user__name">{{ name }}</div>
   <div class="user__type">{{ type }}</div>
    </div>
     </div>
 </template>
 
 <script>
-// import { avatar as avatar } from '../avatar';
+import { avatar as Avatar } from '../avatar'
 import users from '../../pages/feeds/data.json'
 export default {
   components: {
-    // Avatar
+    Avatar
   },
   props: {
     src: {

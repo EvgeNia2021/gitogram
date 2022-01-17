@@ -28,7 +28,11 @@
     </headerBar>
   </div>
   <div class="comment-section">
+    <ul class="c-feed">
+    <li class="c-feed-item" v-for="(item, ndx) in 5" :key="ndx">
   <feed />
+  </li>
+  </ul>
   </div>
 
 </template>

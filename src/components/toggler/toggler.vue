@@ -16,7 +16,7 @@ export default {
   components: {
     icon
   },
-  emits: ['toggle'],
+  emits: ['onToggle'],
   data () {
     return {
       isOpened: false

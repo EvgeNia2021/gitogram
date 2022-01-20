@@ -7,5 +7,16 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials"
   ],
+  webpackFinal: config => {
+    config.module.rules.push({
+      test: /.scss$/i,
+      use: [
+        "style-loader",
+        "css-loader",
+        "sass-loader"
+      ]
+    })
+    return config
+  },
   "framework": "@storybook/vue3"
 }

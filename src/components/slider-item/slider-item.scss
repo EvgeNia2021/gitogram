@@ -1,0 +1,89 @@
+.slide {
+  display: flex;
+  justify-content: center;
+  transition: .5s;
+  transform: scale(.8);
+  position: relative;
+  
+  &__wrapper {
+    width: 320px;
+    height: 530px;
+    background-color: #fff;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  &__header {
+    padding: 9px 9px 13px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  &__user {
+    padding: 12px 5px 0;
+  }
+  
+  &__body {
+    padding: 20px 15px;
+    flex: 1;
+    overflow: auto;
+    scrollbar-color: #6969dd #e0e0e0;
+    scrollbar-width: thin;
+  }
+  
+  
+  &__content {
+    height: 100%;
+  }
+  
+  &__info {
+    height: 100%;
+  }
+  
+  &__footer {
+    border-top: 1px solid #ccc;
+    padding: 24px 0 32px;
+    display: flex;
+    justify-content: center;
+  }
+  &__pic {
+    overflow: hidden;
+    border-radius: 6px;
+  }
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: #404040;
+  border: 2px solid #000;
+  background: #fff;
+  border-radius: 50%;
+  transform: translateY(-50%);
+
+  &__prev {
+    left: -58px;
+
+    .icon {
+      transform: rotate(.5turn);
+    }
+  }
+
+  &__next {
+    right: -58px;
+  }
+}
+
+
+.icon {
+  display: block;
+  transition: .2s;
+  &:hover {
+    color: #31AE54;
+  }
+}

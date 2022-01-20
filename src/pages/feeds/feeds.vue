@@ -34,6 +34,13 @@
   </li>
   </ul>
   </div>
+  <div class="slider__temporary">
+    <ul class="slider__list">
+    <li class="slider__item" v-for="(item, ndx) in 5" :key="ndx">
+ <sliderItem />
+  </li>
+  </ul>
+  </div>
 
 </template>
 
@@ -43,6 +50,7 @@ import { userList } from '../../components/userList'
 import { icon } from '../../icons'
 import users from './data.json'
 import { feed } from '../../components/feed'
+import { sliderItem } from '../../components/slider-item'
 
 export default {
   name: 'feeds',
@@ -50,7 +58,8 @@ export default {
     headerBar,
     icon,
     userList,
-    feed
+    feed,
+    sliderItem
   },
   data () {
     return {

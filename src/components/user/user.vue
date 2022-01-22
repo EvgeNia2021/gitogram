@@ -1,11 +1,11 @@
 <template>
   <div class="user">
-      <Avatar class="user__avatar" :avatar="src" :size="size" />
- <div>
-  <div class="user__name">{{ name }}</div>
-  <div class="user__type">{{ type }}</div>
-   </div>
+    <Avatar class="user__avatar" :avatar="src" :size="size" />
+    <div>
+      <div class="user__name">{{ name }}</div>
+      <div class="user__type">{{ type }}</div>
     </div>
+  </div>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
   <div :class={active} class="progress">
-    <div class="progress__indicator"></div>
+    <div ref="indicator" class="indicator"></div>
   </div>
 </template>
 
@@ -11,10 +11,21 @@ export default {
       active: false
     }
   },
+  emits: ['onFinish'],
+  methods: {
+    emitOnFinish () {
+      this.$emit('onFinish')
+    }
+  },
   mounted () {
     this.$nextTick(() => {
       this.active = true
     })
+    this.$refs.indicator.addEventListener('transitionend', this.emitOnFinish)
+  },
+
+  beforeUnmount () {
+    this.$refs.indicator.removeEventListener('transitionend', this.emitOnFinish)
   }
 }
 </script>

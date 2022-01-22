@@ -1,15 +1,15 @@
 <template>
     <div class="feed-user">
-    <user :src="avatarUrl" :name="username" />
+    <user :src="feed.avatar" :name="feed.username" />
   </div>
   <repoCard>
     <template #repoCard>
-   <h2 class="repo-title">Title</h2>
+   <h2 class="repo-title"> {{ feed.title }}</h2>
     <div class="repo-info">
-      <p>Description</p>
+      <p v-if="feed.description"> {{ feed.description }}</p>
     </div>
     <div class="repo-controls">
-      <controls :star="10" :fork="5" />
+      <controls :star="feed.stars" :fork="feed.forks" />
     </div>
     </template>
      </repoCard>
@@ -41,13 +41,14 @@ export default {
   components: {
     toggler,
     comment,
-    repoCard,
     user,
-    controls
+    controls,
+    repoCard
   },
   data () {
     return {
-      shown: false
+      shown: false,
+      posts: []
     }
   },
   methods: {
@@ -63,13 +64,14 @@ export default {
     username: {
       type: String,
       default: 'Jane Doe'
-    }
+    },
+    feed: Object
+    // title: String,
+    // stars: Number,
+    // forks: Number,
+    // description: String,
+    // owner: String
   },
-  // data () {
-  //   return {
-  //     posts: []
-  //   }
-  // },
   created () {
     this.posts = data
   }

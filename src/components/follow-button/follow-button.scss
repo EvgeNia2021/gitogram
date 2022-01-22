@@ -10,7 +10,25 @@
   border-radius: 5px;
   background-color: #31AE54;
   font-weight: 700;
+
   &:hover {
     background-color: #9E9E9E;
+  }
+
+  &.hover-text {
+    &:hover {
+      .button-text {
+        font-size: 0;
+      }
+
+      &:after {
+        font-size: inherit;
+      }
+    }
+
+    &:after {
+      content: attr(data-hover-text);
+      font-size: 0;
+    }
   }
 }

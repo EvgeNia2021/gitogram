@@ -9,15 +9,21 @@ export default {
   props: {
     avatar: {
       type: String,
-      required: true
+      required: true,
+      default: "https://picsum.photos/300/300",
     },
     size: {
       type: String,
       default: 's'
     }
   },
-  setup (props) {
+  setup(props) {
+    
     const style = {
+       xs: {
+        width: '37px',
+        height: '37px'
+      },
       s: {
         width: '44px',
         height: '44px'

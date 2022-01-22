@@ -1,46 +1,46 @@
 <template>
   <div class="user">
-      <Avatar class="user__avatar" :avatar="src" :size="size" />
- <div>
-  <div class="user__name">{{ name }}</div>
-  <div class="user__type">{{ type }}</div>
-   </div>
+    <Avatar class="user__avatar" :avatar="src" :size="size" />
+    <div>
+      <div class="user__name">{{ name }}</div>
+      <div class="user__type">{{ type }}</div>
     </div>
+  </div>
 </template>
 
 <script>
-import { avatar as Avatar } from '../avatar'
-import users from '../../pages/feeds/data.json'
+import { avatar as Avatar } from "../avatar";
+import users from "../../pages/feeds/data.json";
 export default {
   components: {
-    Avatar
+    Avatar,
   },
   props: {
     src: {
       type: String,
-      default: 'https://picsum.photos/300/300'
+      default: "https://picsum.photos/300/300",
     },
     name: {
       type: String,
-      default: 'Jane Doe'
+      default: "Jane Doe",
     },
     type: {
       type: String,
-      default: ''
+      default: "",
     },
     size: {
       type: String,
-      default: 's'
-    }
+      default: "s",
+    },
   },
-  setup (props) {
-    return {}
+  setup(props) {
+    return {};
   },
-  data () {
+  data() {
     return {
-      users
-    }
-  }
-}
+      users,
+    };
+  },
+};
 </script>
 <style src="./user.scss" lang="scss" scoped></style>

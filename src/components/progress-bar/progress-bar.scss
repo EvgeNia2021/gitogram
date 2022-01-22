@@ -5,14 +5,15 @@
   position: relative;
   overflow: hidden;
   &.active {
-    .progress__indicator {
+    &.indicator {
       width: 100%;
-     
+      
     }
   }
 }
 
-.progress__indicator {
+.indicator {
+  
   position: absolute;
   background-color: #31AE54;
   top: 0;

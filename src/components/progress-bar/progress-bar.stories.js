@@ -2,15 +2,24 @@ import  progressBar  from './progress-bar.vue'
 
 export default {
   title: 'Progress Bar',
-  component: {
-    progressBar
+  component: 
+    progressBar,
+    argTypes: {
+      onFinish: {
+        action: "onFinish",
+        description: ""
+      }
+    }
   }
-} 
 
-const ProgressBarTemplate = () => ({
-    components: { progressBar },
+
+const ProgressBarTemplate = (args) => ({
+    components: { xProgress: progressBar },
+    data () {
+      return { args }
+    },
     template: `
-    <progressBar />`
+    <xProgress @onFinish="args.onFinish" />`
     });
     
     export const Default = ProgressBarTemplate.bind({});

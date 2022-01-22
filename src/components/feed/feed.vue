@@ -3,13 +3,13 @@
     <user :src="avatarUrl" :name="username" />
   </div>
   <repoCard>
-    <template #repoCard>
-   <h2 class="repo-title">Title</h2>
+    <template>
+   <h2 class="repo-title">title: {{ title }}</h2>
     <div class="repo-info">
-      <p>Description</p>
+      <p>description: {{ description }}</p>
     </div>
     <div class="repo-controls">
-      <controls :star="10" :fork="5" />
+      <controls :star="stars" :fork="forks" />
     </div>
     </template>
      </repoCard>
@@ -31,7 +31,7 @@
 <script>
 import { comment } from '../comment'
 import { toggler } from '../toggler'
-import { repoCard } from '../repo-card'
+// import { repoCard } from '../repo-card'
 import { user } from '../user'
 import { data } from '../../pages/feeds'
 import { controls } from '../controls'
@@ -41,7 +41,6 @@ export default {
   components: {
     toggler,
     comment,
-    repoCard,
     user,
     controls
   },
@@ -63,7 +62,11 @@ export default {
     username: {
       type: String,
       default: 'Jane Doe'
-    }
+    },
+    title: String,
+    stars: Number,
+    forks: Number,
+    description: String
   },
   // data () {
   //   return {

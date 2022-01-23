@@ -1,8 +1,8 @@
-import followButton from './follow-button.vue'
+import myButton from './button.vue'
 
 export default {
-  title: 'followButton',
-  component: { followButton },
+  title: 'myButton',
+  component: { myButton },
 argTypes: {
   hoverText: {
     control: { type: 'text'}
@@ -11,12 +11,12 @@ argTypes: {
 } 
 
 const template = (args) => ({
-  components: { fButton: followButton },
+  components: { myButton },
   data () {
     return { args }
   },
   template: `
-  <fButton v-bind="args">Follow</fButton>
+  <myButton v-bind="args">Follow</myButton>
   `
 })
 

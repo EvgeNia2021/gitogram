@@ -24,4 +24,4 @@ export default {
 }
 </script>
 
-<style src="./follow-button.scss" lang="scss" scoped></style>
+<style src="./button.scss" lang="scss" scoped></style>

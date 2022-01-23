@@ -19,10 +19,10 @@
         </div>
       </div>
       <div class="slide__footer">
-        <follow-button>
+        <myButton>
           <template>
           </template>
-        </follow-button>
+        </myButton>
       </div>
       <template>
         <button class="arrow arrow__prev">
@@ -43,17 +43,21 @@
 <script>
 
 import { user } from '../user'
-import { followButton } from '../follow-button'
+import { myButton } from '../button'
 import { icon } from '../../icons'
 import { progressBar } from '../progress-bar'
 
 export default {
   components: {
     user,
-    followButton,
+    myButton,
     icon,
     progressBar
-  }
+  },
+  emits: ['onFollow', 'onUnFollow']
+  // props: {
+  //   feed: Object
+  // }
 }
 </script>
 <style src="./slider-item.scss" lang="scss" scoped></style>

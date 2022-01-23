@@ -16,12 +16,10 @@
         </div>
       </template>
       <template #content>
-        <!-- <pre>{{items}}</pre> -->
         <ul class="users-list">
-          <li class="users-item" v-for="user in users" :key="user.id">
+          <li class="users-item" v-for="item in items" :key="item.id">
             <userList
-              :avatar="user.avatar"
-              :username="user.username"
+            :feed="getFeedData(item)"
               @onPress="handlePress(user.id)"
             />
           </li>
@@ -49,7 +47,7 @@
 import { headerBar } from '../../components/header-bar'
 import { userList } from '../../components/userList'
 import { icon } from '../../icons'
-import users from './data.json'
+// import users from './data.json'
 import { feed } from '../../components/feed'
 import { sliderItem } from '../../components/slider-item'
 import * as api from '../../api'
@@ -73,7 +71,7 @@ export default {
   },
   data () {
     return {
-      users,
+      // users,
       items: []
     }
   },

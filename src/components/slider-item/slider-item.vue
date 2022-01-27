@@ -1,22 +1,25 @@
 <template>
-  <div class="slide">
+  <div class="slide" :class="{ active }">
     <div class="slide__wrapper">
       <div class="slide__header">
         <div class="slide__pbar">
-          <progressBar />
+          <progressBar :active="active" />
         </div>
         <div class="slide__user">
-          <user />
+          <user :username="data.username" :src="data.userAvatar" />
         </div>
       </div>
       <div class="slide__body">
+        <div class="loader" v-if="loading">
+        <!-- <spinner /> -->
+        </div>
+        <div class="slide__info" v-else>
         <div class="slide__pic">
           <img src="https://picsum.photos/300/200" alt="" >
         </div>
-        <div class="slide__info">
-          <div class="slide__content"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-
+        <div v-if="data.content?.length" class="slide__text" v-html="data.content">
         </div>
+        <!-- <placeholder v-else :paragraphs="2" /> -->
       </div>
       <div class="slide__footer">
         <myButton>
@@ -24,7 +27,7 @@
           </template>
         </myButton>
       </div>
-      <template>
+      <template v-if="active">
         <button class="arrow arrow__prev">
           <span class="icon">
             <icon name="arrowLeft" />
@@ -38,6 +41,7 @@
       </template>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -46,6 +50,8 @@ import { user } from '../user'
 import { myButton } from '../button'
 import { icon } from '../../icons'
 import { progressBar } from '../progress-bar'
+// import { placeholder } from '../placeholder'
+// import { spinner } from '../spinner'
 
 export default {
   components: {
@@ -53,11 +59,19 @@ export default {
     myButton,
     icon,
     progressBar
+    // placeholder,
+    // spinner
   },
-  emits: ['onFollow', 'onUnFollow']
-  // props: {
-  //   feed: Object
-  // }
+  emits: ['onFollow', 'onUnFollow'],
+  props: {
+    active: Boolean,
+    loading: Boolean,
+    data: {
+      type: Object,
+      required: true,
+      default: () => ({})
+    }
+  }
 }
 </script>
 <style src="./slider-item.scss" lang="scss" scoped></style>

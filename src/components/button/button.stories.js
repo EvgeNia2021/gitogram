@@ -3,12 +3,12 @@ import myButton from './button.vue'
 export default {
   title: 'myButton',
   component: { myButton },
-argTypes: {
-  hoverText: {
-    control: { type: 'text'}
+  argTypes: {
+    hoverText: {
+      control: { type: 'text' }
+    }
   }
 }
-} 
 
 const template = (args) => ({
   components: { myButton },
@@ -20,7 +20,7 @@ const template = (args) => ({
   `
 })
 
-export const Default = template.bind({});
+export const Default = template.bind({})
 
 Default.args = {
   hoverText: 'Unfollow'

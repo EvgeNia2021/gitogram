@@ -8,7 +8,7 @@
             <icon name="home" />
           </div>
           <div class="header-avatar">
-             <avatar :size="size" />
+            <avatar :size="size" />
           </div>
           <div class="logout">
             <icon name="logout" />
@@ -17,10 +17,13 @@
       </template>
       <template #content>
         <ul class="users-list">
-          <li class="users-item" v-for="item in items" :key="item.id">
+          <li class="users-item" v-for="{ id, owner, name } in items" :key="id">
             <userList
-            :feed="getFeedData(item)"
-              @onPress="handlePress(user.id)"
+              :src="owner.avatar_url"
+              :username="name"
+              @onPress="
+                $router.push({ name: 'Stories', params: { initialSlide: id } })
+              "
             />
           </li>
         </ul>
@@ -62,12 +65,6 @@ export default {
     feed,
     sliderItem,
     Avatar
-  },
-  props: {
-    size: {
-      type: String,
-      default: 'xs'
-    }
   },
   data () {
     return {

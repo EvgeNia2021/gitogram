@@ -1,71 +1,88 @@
 <template>
   <div class="slide" :class="{ active }">
+    <pre>{{data}}</pre>
     <div class="slide__wrapper">
       <div class="slide__header">
         <div class="slide__pbar">
-          <progressBar :active="active" />
+          <progressBar :active="active" @onFinish="$emit('onProgressFinish')" />
         </div>
         <div class="slide__user">
-          <user :username="data.username" :src="data.userAvatar" />
+          <user :name="data.username" :src="data.userAvatar" />
         </div>
       </div>
       <div class="slide__body">
         <div class="loader" v-if="loading">
-        <!-- <spinner /> -->
+          <spinner />
         </div>
         <div class="slide__info" v-else>
-        <div class="slide__pic">
+          <!-- <div class="slide__pic">
           <img src="https://picsum.photos/300/200" alt="" >
+        </div> -->
+          <div
+            v-if="data.content?.length"
+            class="slide__text"
+            v-html="data.content"
+          ></div>
+          <placeholder v-else :paragraphs="2" />
         </div>
-        <div v-if="data.content?.length" class="slide__text" v-html="data.content">
+        <div class="slide__footer">
+          <myButton>
+            <template> </template>
+          </myButton>
         </div>
-        <!-- <placeholder v-else :paragraphs="2" /> -->
+        <template v-if="active">
+          <button
+            v-if="btnsShown.includes('prev')"
+            class="arrow arrow__prev"
+            @click="$emit('onPrevSlide')"
+          >
+            <span class="icon">
+              <icon name="arrowLeft" />
+            </span>
+          </button>
+          <button
+            v-if="btnsShown.includes('next')"
+            class="arrow arrow__next"
+            @click="$emit('onNextSlide')"
+          >
+            <span class="icon">
+              <icon name="arrowRight" />
+            </span>
+          </button>
+        </template>
       </div>
-      <div class="slide__footer">
-        <myButton>
-          <template>
-          </template>
-        </myButton>
-      </div>
-      <template v-if="active">
-        <button class="arrow arrow__prev">
-          <span class="icon">
-            <icon name="arrowLeft" />
-          </span>
-        </button>
-        <button class="arrow arrow__next">
-          <span class="icon">
-            <icon name="arrowRight" />
-          </span>
-        </button>
-      </template>
     </div>
-  </div>
   </div>
 </template>
 
 <script>
-
 import { user } from '../user'
 import { myButton } from '../button'
 import { icon } from '../../icons'
 import { progressBar } from '../progress-bar'
-// import { placeholder } from '../placeholder'
-// import { spinner } from '../spinner'
+import { placeholder } from '../placeholder'
+import { spinner } from '../spinner'
 
 export default {
   components: {
     user,
     myButton,
     icon,
-    progressBar
-    // placeholder,
-    // spinner
+    progressBar,
+    spinner,
+    placeholder
   },
-  emits: ['onFollow', 'onUnFollow'],
+  emits: ['onPrevSlide', 'onNextSlide', 'onProgressFinish'],
   props: {
     active: Boolean,
     loading: Boolean,
+    btnsShown: {
+      type: Array,
+      default: () => ['next', 'prev'],
+      validator (value) {
+        return value.every((item) => item === 'next' || item === 'prev')
+      }
+    },
     data: {
       type: Object,
       required: true,

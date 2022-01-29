@@ -1,31 +1,28 @@
 <template>
-    <div class="feed-user">
+  <div class="feed-user">
     <user :src="feed.avatar" :name="feed.username" />
   </div>
   <repoCard>
     <template #repoCard>
-   <h2 class="repo-title"> {{ feed.title }}</h2>
-    <div class="repo-info">
-      <p v-if="feed.description"> {{ feed.description }}</p>
-    </div>
-    <div class="repo-controls">
-      <controls :star="feed.stars" :fork="feed.forks" />
-    </div>
+      <h2 class="repo-title">{{ feed.title }}</h2>
+      <div class="repo-info">
+        <p v-if="feed.description">{{ feed.description }}</p>
+      </div>
+      <div class="repo-controls">
+        <controls :star="feed.stars" :fork="feed.forks" />
+      </div>
     </template>
-     </repoCard>
-    <toggler @onToggle="toggle" />
-    <div class="comments" v-if="shown">
-      <ul class="comments-list">
-        <li class="comments-item" v-for="n in 5" :key="n">
-          <comment text="Something clever" username="Jane Doe" />
-        </li>
-      </ul>
-    </div>
-
-  <div class="date">
-    random date
+  </repoCard>
+  <toggler @onToggle="toggle" />
+  <div class="comments" v-if="shown">
+    <ul class="comments-list">
+      <li class="comments-item" v-for="n in 5" :key="n">
+        <comment text="Something clever" username="Jane Doe" />
+      </li>
+    </ul>
   </div>
 
+  <div class="date">random date</div>
 </template>
 
 <script>
@@ -57,14 +54,14 @@ export default {
     }
   },
   props: {
-    avatarUrl: {
-      type: String,
-      default: 'https://picsum.photos/300/300'
-    },
-    username: {
-      type: String,
-      default: 'Jane Doe'
-    },
+    // avatarUrl: {
+    //   type: String,
+    //   default: 'https://picsum.photos/300/300'
+    // },
+    // username: {
+    //   type: String,
+    //   default: 'Jane Doe'
+    // },
     feed: Object
     // title: String,
     // stars: Number,
@@ -76,7 +73,6 @@ export default {
     this.posts = data
   }
 }
-
 </script>
 
 <style src="./feed.scss" lang="scss" scoped></style>

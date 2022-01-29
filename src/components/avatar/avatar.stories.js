@@ -1,17 +1,17 @@
-import  avatar  from './avatar.vue'
+import avatar from './avatar.vue'
 
 export default {
-  title: "Avatar",
+  title: 'Avatar',
   components: {
     avatar
   }
-} 
+}
 
 const sAvatar = () => ({
-    components: {avatar},
-    template: `
+  components: { avatar },
+  template: `
       <avatar />
     `
-  });
+})
 
-export const DefaultAvatar = sAvatar.bind({});
+export const DefaultAvatar = sAvatar.bind({})

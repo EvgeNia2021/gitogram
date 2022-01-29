@@ -1,6 +1,7 @@
 <template>
 <router-view />
   <!-- <feeds /> -->
+
 </template>
 
 <script>

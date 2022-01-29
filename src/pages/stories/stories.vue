@@ -3,7 +3,7 @@
     <header class="header">
       <div class="g-container">
         <button class="logo">
-          <logo white />
+          <icon name="logo" />
         </button>
         <button class="close-btn">
           <icon name="close" />
@@ -11,19 +11,20 @@
       </div>
     </header>
     <div class="content">
-      <slider />
+      {{$route.params.initialSlide}}
+      <slider :initialSlide="Number($route.params.initialSlide)" />
     </div>
   </div>
 </template>
 
 <script>
 import { slider } from '../../components/slider'
-import { logo } from '../../icons'
+import { icon } from '../../icons'
 
 export default {
   components: {
     slider,
-    logo
+    icon
   }
 }
 </script>

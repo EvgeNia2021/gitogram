@@ -4,13 +4,11 @@ import { stories } from '../pages/stories'
 export default [
   {
     path: '/',
-    components: {
-      default: feeds
-    }
+    component: feeds
   },
   {
     path: '/stories',
-    name: 'stories',
+    name: 'Stories',
     component: stories
   }
 ]

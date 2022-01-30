@@ -1,7 +1,6 @@
 <template>
   <div class="stories-slider">
     <div class="stories-container">
-      <!-- <pre>{{trendings}}</pre> -->
       <ul class="stories">
         <li
           class="stories-item"
@@ -102,15 +101,18 @@ export default {
     }
   },
   async mounted () {
-    console.log(this.initialSlide)
     if (this.initialSlide) {
       const ndx = this.trendings.findIndex(
         (item) => item.id === this.initialSlide
       )
       await this.handleSlide(ndx)
     }
+    // if (this.trendings.length === 0) {
+    // }
     await this.fetchTrendings()
     await this.loadReadme()
   }
 }
 </script>
+
+<style lang="scss" scoped src="./slider.scss"></style>

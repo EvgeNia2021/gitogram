@@ -1,6 +1,5 @@
 <template>
   <div class="slide" :class="{ active }">
-    <pre>{{data}}</pre>
     <div class="slide__wrapper">
       <div class="slide__header">
         <div class="slide__pbar">
@@ -15,15 +14,13 @@
           <spinner />
         </div>
         <div class="slide__info" v-else>
-          <!-- <div class="slide__pic">
-          <img src="https://picsum.photos/300/200" alt="" >
-        </div> -->
           <div
             v-if="data.content?.length"
             class="slide__text"
             v-html="data.content"
           ></div>
           <placeholder v-else :paragraphs="2" />
+        </div>
         </div>
         <div class="slide__footer">
           <myButton>
@@ -36,8 +33,8 @@
             class="arrow arrow__prev"
             @click="$emit('onPrevSlide')"
           >
-            <span class="icon">
-              <icon name="arrowLeft" />
+            <span class="arrow__icon">
+              <icon name="arrow" />
             </span>
           </button>
           <button
@@ -45,12 +42,11 @@
             class="arrow arrow__next"
             @click="$emit('onNextSlide')"
           >
-            <span class="icon">
-              <icon name="arrowRight" />
+            <span class="arrow__icon">
+              <icon name="arrow" />
             </span>
           </button>
         </template>
-      </div>
     </div>
   </div>
 </template>

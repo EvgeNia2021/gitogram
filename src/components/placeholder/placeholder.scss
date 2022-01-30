@@ -2,14 +2,14 @@
   color: #dedede;
 }
 
-.mainpic {
+.placeholder__pic {
   height: 136px;
   margin-bottom: 28px;
   border-radius: 4px;
   background: currentColor;
 }
 
-.content {
+.placeholder__content {
   &:not(:last-child) {
     margin-bottom: 18px;
   }
@@ -27,7 +27,7 @@
     width: 65%;
   }
 
-  .item {
+  .placeholder__item {
     width: 80%;
   }
 

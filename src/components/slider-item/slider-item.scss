@@ -81,7 +81,9 @@
 }
 
 
-.icon {
+.arrow__icon {
+  width: 18px;
+  height: 17px;
   display: block;
   transition: .2s;
   &:hover {

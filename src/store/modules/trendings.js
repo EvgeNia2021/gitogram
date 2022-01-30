@@ -5,9 +5,12 @@ export default {
   state: {
     data: []
   },
+  getters: {
+    getRepoById: (state) => (id) => state.data.find((item) => item.id === id)
+  },
   mutations: {
     SET_TRENDINGS: (state, trendings) => {
-      console.log(trendings)
+      // console.log(trendings)
       state.data = trendings
     },
     SET_README: (state, payload) => {
@@ -18,9 +21,6 @@ export default {
         return repo
       })
     }
-  },
-  getters: {
-    getRepoById: (state) => (id) => state.data.find((item) => item.id === id)
   },
   actions: {
     async fetchTrendings ({ state, commit, rootState }) {
@@ -42,7 +42,7 @@ export default {
       try {
         const { data } = await api.readme.getReadme({ owner, repo })
         commit('SET_README', { id, content: data })
-      } catch (error) {
+      } catch (e) {
         alert('Something went wrong')
       }
     }

@@ -2,16 +2,18 @@
   <div class="wrapper">
     <header class="header">
       <div class="g-container">
-        <button class="logo">
+        <div class="header__content">
+        <button class="header__logo"  @click="$router.push({ name: 'Feeds' })">
           <icon name="logo" />
         </button>
-        <button class="close-btn">
-          <icon name="close" />
+        <button class="close__btn"  @click="$router.push({ name: 'Feeds' })">
+          <icon name="closeBtn" />
         </button>
+        </div>
       </div>
     </header>
-    <div class="content">
-      {{$route.params.initialSlide}}
+    <div class="slider__content">
+      <!-- {{$route.params.initialSlide}} -->
       <slider :initialSlide="Number($route.params.initialSlide)" />
     </div>
   </div>
@@ -28,3 +30,5 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" src="./stories.scss" scoped></style>

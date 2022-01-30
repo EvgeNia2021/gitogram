@@ -4,6 +4,7 @@ import { stories } from '../pages/stories'
 export default [
   {
     path: '/',
+    name: 'Feeds',
     component: feeds
   },
   {

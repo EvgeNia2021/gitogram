@@ -4,6 +4,12 @@
   transition: .5s;
   transform: scale(.8);
   position: relative;
+
+  &.active {
+    transform: scale(1);
+    z-index: 10;
+    user-select: initial;
+  }
   
   
   &__wrapper {
@@ -70,7 +76,7 @@
   &__prev {
     left: -58px;
 
-    .icon {
+    .arrow__icon {
       transform: rotate(.5turn);
     }
   }
@@ -89,4 +95,11 @@
   &:hover {
     color: #31AE54;
   }
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }

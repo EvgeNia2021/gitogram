@@ -1,15 +1,15 @@
 <template>
   <div class="feed-user">
-    <user :src="feed.avatar" :name="feed.username" />
+    <user :src="src" :name="username" />
   </div>
   <repoCard>
     <template #repoCard>
-      <h2 class="repo-title">{{ feed.title }}</h2>
+      <h2 class="repo-title">{{ title }}</h2>
       <div class="repo-info">
-        <p v-if="feed.description">{{ feed.description }}</p>
+        <p v-if="description">{{ description }}</p>
       </div>
       <div class="repo-controls">
-        <controls :star="feed.stars" :fork="feed.forks" />
+        <controls :stars="stars" :forks="forks" />
       </div>
     </template>
   </repoCard>
@@ -54,23 +54,32 @@ export default {
     }
   },
   props: {
-    // avatarUrl: {
-    //   type: String,
-    //   default: 'https://picsum.photos/300/300'
-    // },
-    // username: {
-    //   type: String,
-    //   default: 'Jane Doe'
-    // },
-    feed: Object
-    // title: String,
-    // stars: Number,
-    // forks: Number,
-    // description: String,
-    // owner: String
-  },
-  created () {
-    this.posts = data
+    username: {
+      type: String,
+      required: true
+    },
+    src: {
+      type: String,
+      required: true
+    },
+    stars: {
+      type: Number,
+      required: true
+    },
+    forks: {
+      type: Number,
+      required: true
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    description: {
+      type: String
+    },
+    created () {
+      this.posts = data
+    }
   }
 }
 </script>

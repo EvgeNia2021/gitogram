@@ -7,7 +7,7 @@
       <div class="controls__star">Star</div>
     </div>
     <div class="controls__frame">
-      {{ star }}
+      {{ stars }}
     </div>
   <div class="controls__frame">
       <div class="controls__icon">
@@ -16,7 +16,7 @@
       <div class="controls__fork">Fork</div>
     </div>
     <div class="controls__frame">
-      {{ fork }}
+      {{ forks }}
     </div>
     </div>
 </template>
@@ -28,11 +28,11 @@ export default {
     icon
   },
   props: {
-    star: {
+    stars: {
       type: Number,
       required: true
     },
-    fork: {
+    forks: {
       type: Number,
       required: true
     }

@@ -1,5 +1,6 @@
 <template>
-  <div :class={active} class="progress">
+  <div :class="{ active: beginProgress }" class="progress">
+    <pre>{{ beginProgress }}</pre>
     <div ref="indicator" class="indicator"></div>
   </div>
 </template>
@@ -11,6 +12,9 @@ export default {
       active: false
     }
   },
+  props: {
+    beginProgress: Boolean
+  },
   emits: ['onFinish'],
   methods: {
     emitOnFinish () {
@@ -18,14 +22,17 @@ export default {
     }
   },
   mounted () {
-    this.$nextTick(() => {
-      this.active = true
-    })
+    // this.$nextTick(() => {
+    //   this.active = true
+    // })
     this.$refs.indicator.addEventListener('transitionend', this.emitOnFinish)
   },
 
   beforeUnmount () {
-    this.$refs.indicator.removeEventListener('transitionend', this.emitOnFinish)
+    this.$refs.indicator.removeEventListener(
+      'transitionend',
+      this.emitOnFinish
+    )
   }
 }
 </script>

@@ -3,7 +3,7 @@
     <div class="slide__wrapper">
       <div class="slide__header">
         <div class="slide__pbar">
-          <progressBar :active="active" @onFinish="$emit('onProgressFinish')" />
+          <progressBar :active="active" :beginProgress="active" @onFinish="$emit('onProgressFinish')" />
         </div>
         <div class="slide__user">
           <user :name="data.username" :src="data.userAvatar" />
@@ -21,32 +21,32 @@
           ></div>
           <placeholder v-else :paragraphs="2" />
         </div>
-        </div>
-        <div class="slide__footer">
-          <myButton>
-            <template> </template>
-          </myButton>
-        </div>
-        <template v-if="active">
-          <button
-            v-if="btnsShown.includes('prev')"
-            class="arrow arrow__prev"
-            @click="$emit('onPrevSlide')"
-          >
-            <span class="arrow__icon">
-              <icon name="arrow" />
-            </span>
-          </button>
-          <button
-            v-if="btnsShown.includes('next')"
-            class="arrow arrow__next"
-            @click="$emit('onNextSlide')"
-          >
-            <span class="arrow__icon">
-              <icon name="arrow" />
-            </span>
-          </button>
-        </template>
+      </div>
+      <div class="slide__footer">
+        <myButton>
+          <template> </template>
+        </myButton>
+      </div>
+      <template v-if="active">
+        <button
+          v-if="btnsShown.includes('prev')"
+          class="arrow arrow__prev"
+          @click="$emit('onPrevSlide')"
+        >
+          <span class="arrow__icon">
+            <icon name="arrow" />
+          </span>
+        </button>
+        <button
+          v-if="btnsShown.includes('next')"
+          class="arrow arrow__next"
+          @click="$emit('onNextSlide')"
+        >
+          <span class="arrow__icon">
+            <icon name="arrow" />
+          </span>
+        </button>
+      </template>
     </div>
   </div>
 </template>
@@ -72,6 +72,7 @@ export default {
   props: {
     active: Boolean,
     loading: Boolean,
+    beginProgress: Boolean,
     btnsShown: {
       type: Array,
       default: () => ['next', 'prev'],

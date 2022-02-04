@@ -1,12 +1,11 @@
 <template>
   <div class="stories-slider">
-    <div class="stories-container">
-      <ul class="stories">
+    <div class="stories-container" ref="slider">
+      <ul class="stories" ref="item">
         <li
           class="stories-item"
           v-for="(trending, ndx) in trendings"
           :key="trending.id"
-          ref="item"
         >
           <slider-item
             :data="getStoryData(trending)"
@@ -16,6 +15,7 @@
             @onNextSlide="handleSlide(ndx + 1)"
             @onPrevSlide="handleSlide(ndx - 1)"
             @onProgressFinish="handleSlide(ndx + 1)"
+            :beginProgress="readyForProgress"
           />
         </li>
       </ul>
@@ -41,9 +41,11 @@ export default {
       slideNdx: 0,
       sliderPosition: 0,
       loading: false,
-      btnsShown: true
+      btnsShown: true,
+      readyForProgress: true
     }
   },
+  emits: ['noSlidesLeft'],
   computed: {
     ...mapState({
       trendings: (state) => state.trendings.data.trendings
@@ -74,10 +76,8 @@ export default {
     },
     moveSlider (slideNdx) {
       const { slider, item } = this.$refs
-      const slideWidth = parseInt(
-        getComputedStyle(item).getPropertyValue('width'),
-        10
-      )
+      const slideWidth =
+        parseInt(getComputedStyle(item).getPropertyValue('width')) / 10
       this.slideNdx = slideNdx
       this.sliderPosition = -(slideWidth * slideNdx)
 
@@ -86,6 +86,7 @@ export default {
     async loadReadme () {
       this.loading = true
       this.btnsShown = false
+      this.readyForProgress = false
       try {
         await this.fetchReadmeForActiveSlide()
       } catch (e) {
@@ -93,11 +94,16 @@ export default {
       } finally {
         this.loading = false
         this.btnsShown = true
+        this.readyForProgress = true
       }
     },
     async handleSlide (slideNdx) {
-      this.moveSlider(slideNdx)
-      await this.loadReadme()
+      if (slideNdx < this.trendings.length) {
+        this.moveSlider(slideNdx)
+        await this.loadReadme()
+      } else {
+        this.$emit('noSlidesLeft')
+      }
     }
   },
   async mounted () {

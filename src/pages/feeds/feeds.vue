@@ -17,12 +17,23 @@
       </template>
       <template #content>
         <ul class="users-list">
-          <li class="users-item" v-for="{ id, owner, name } in items" :key="id">
+          <!-- <li class="users-item" v-for="{ id, owner, name } in items" :key="id">
             <userList
               :src="owner.avatar_url"
               :username="name"
               @onPress="
                 $router.push({ name: 'Stories', params: { initialSlide: id } })
+              "
+            /> -->
+          <li class="users-list" v-for="item in trendings" :key="item.id">
+            <userList
+              :src="item.owner?.avatar_url"
+              :username="item.owner?.login"
+              @onPress="
+                $router.push({
+                  name: 'Stories',
+                  params: { initialSlide: item.id },
+                })
               "
             />
           </li>
@@ -32,28 +43,38 @@
   </div>
   <div class="comment-section">
     <ul class="c-feed">
-      <li class="c-feed-item" v-for="item in items" :key="item.id">
-        <feed :feed="getFeedData(item)" />
+      <li class="c-feed-item" v-for="item in trendings" :key="item.id">
+        <feed
+          :feed="getFeedData(item)"
+          :username="item.owner?.login"
+          :src="item.owner?.avatar_url"
+          :title="item.name"
+          :description="item.description"
+          :stars="item.stargazers_count"
+          :forks="item.forks_count"
+        />
       </li>
     </ul>
   </div>
-  <div class="slider__temporary">
+  <!-- <div class="slider__temporary">
     <ul class="slider__list">
       <li class="slider__item" v-for="(item, ndx) in 5" :key="ndx">
         <sliderItem />
       </li>
     </ul>
-  </div>
+  </div> -->
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 import { headerBar } from '../../components/header-bar'
 import { userList } from '../../components/userList'
 import { icon } from '../../icons'
 // import users from './data.json'
 import { feed } from '../../components/feed'
-import { sliderItem } from '../../components/slider-item'
-import * as api from '../../api'
+// import { sliderItem } from '../../components/slider-item'
+// import * as api from '../../api'
 import Avatar from '../../components/avatar/avatar.vue'
 
 export default {
@@ -63,16 +84,25 @@ export default {
     icon,
     userList,
     feed,
-    sliderItem,
+    // sliderItem,
     Avatar
   },
-  data () {
-    return {
-      // users,
-      items: []
-    }
+  computed: {
+    ...mapState({
+      trendings: (state) => state.trendings.data.trendings
+    })
   },
+  // data () {
+  //   return {
+  //     // users,
+  //     items: []
+  //   }
+  // },
   methods: {
+    ...mapActions({
+      fetchTrendings: 'trendings/fetchTrendings',
+      fetchReadme: 'trendings/fetchReadme'
+    }),
     getFeedData (item) {
       return {
         title: item.name,
@@ -84,10 +114,11 @@ export default {
       }
     }
   },
-  async created () {
+  async mounted () {
     try {
-      const { data } = await api.trendings.getTrendings()
-      this.items = data.items
+      await this.fetchTrendings()
+      // const { data } = await api.trendings.getTrendings()
+      // this.items = data.items
     } catch (error) {
       alert('Something went wrong')
     }

@@ -6,15 +6,16 @@ export default {
     data: []
   },
   getters: {
-    getRepoById: (state) => (id) => state.data.find((item) => item.id === id)
+    getRepoById: (state) => (id) => state.data.trendings.find((item) => item.id === id)
   },
   mutations: {
     SET_TRENDINGS: (state, trendings) => {
       // console.log(trendings)
+      console.log(trendings)
       state.data = trendings
     },
     SET_README: (state, payload) => {
-      state.data = state.data.map((repo) => {
+      state.data.trendings = state.data.trendings.map((repo) => {
         if (payload.id === repo.id) {
           repo.readme = payload.content
         }
@@ -27,10 +28,12 @@ export default {
       console.log()
       try {
         const { data } = await api.trendings.getTrendings()
-        commit('SET_TRENDINGS', {
+        commit('SET_TRENDINGS',
+          {
           // starred: rootState.starred.data,
-          trendings: data.items
-        })
+            trendings: data.items
+          }
+        )
       } catch (error) {
         console.log(error)
         throw error

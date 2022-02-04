@@ -1,9 +1,9 @@
 <template>
-  <button :class="['follow__button', {'hover-text': withHoverText}]"
+  <button :class="['button', {'hover-text': withHoverText}]"
 :data-hover-text="hoverText">
-    <span class="button-text">
+    <!-- <span class="button-text"> -->
     <slot></slot>
-</span>
+<!-- </span> -->
   </button>
 </template>
 

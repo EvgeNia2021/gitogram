@@ -1,5 +1,6 @@
 import { feeds } from '../pages/feeds'
 import { stories } from '../pages/stories'
+import { auth } from '../pages/auth'
 
 export default [
   {
@@ -11,5 +12,10 @@ export default [
     path: '/stories',
     name: 'Stories',
     component: stories
+  },
+  {
+    path: '/auth',
+    name: 'Auth',
+    component: auth
   }
 ]

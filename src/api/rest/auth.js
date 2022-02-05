@@ -1,28 +1,28 @@
-// import { makeRequest } from '../requests'
+import { makeRequest } from '../requests'
+import env from '../../../env'
 
-// export const getCode = () => {
-//   const githubApi = 'https://github.com/login/oauth/authorize'
+export const getCode = () => {
+  const githubAuthApi = 'https://github.com/login/oauth/authorize'
 
-//   const params = new URLSearchParams()
+  const params = new URLSearchParams()
 
-//   params.append('client_id', process.env.VUE_APP_CLIENT_ID)
-//   params.append('scope', 'repo,user')
+  params.append('client_id', env.clientId)
+  params.append('scope', 'repo:status read:user')
 
-//   window.location.href = `${githubApi}?${params}`
-// }
+  window.location.href = `${githubAuthApi}?${params}`
+}
 
-// export const getToken = (code) => {
-//   return makeRequest({
-//     url: 'https://webdev-api.loftschool.com/github',
-//     method: 'post',
-//     data: {
-//       clientId: process.env.VUE_APP_CLIENT_ID,
-//       clientSecret: process.env.VUE_APP_CLIENT_SECRET,
-//       code
-//     }
-//   })
-// }
-
-// export const getUserData = () => makeRequest({
-//   url: '/user'
-// })
+export const getToken = (code) => {
+  return makeRequest({
+    url: 'http://localhost:8080/',
+    method: 'post',
+    data: {
+      clientId: env.clientId,
+      clientSecret: env.clientSecret,
+      code
+    }
+  })
+}
+export const getUserData = () => makeRequest({
+  url: '/user'
+})

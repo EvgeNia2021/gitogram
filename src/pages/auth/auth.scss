@@ -1,5 +1,5 @@
 .auth {
-  height: 1001%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,7 +14,7 @@
   flex-direction: column;
 }
 .auth__field {
-  padding-top: 20%;
+  padding-top: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;

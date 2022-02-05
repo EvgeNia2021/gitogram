@@ -3,7 +3,11 @@
     <div class="slide__wrapper">
       <div class="slide__header">
         <div class="slide__pbar">
-          <progressBar :active="active" :beginProgress="active" @onFinish="$emit('onProgressFinish')" />
+          <progressBar
+            :active="active"
+            :beginProgress="active"
+            @onFinish="$emit('onProgressFinish')"
+          />
         </div>
         <div class="slide__user">
           <user :name="data.username" :src="data.userAvatar" />
@@ -23,9 +27,14 @@
         </div>
       </div>
       <div class="slide__footer">
-        <myButton>
-          <template> </template>
-        </myButton>
+        <myButton
+          :theme="data.following.status ? 'grey' : 'green'"
+          :loading="data.following.loading"
+          @click="
+            $emit(data.following.status ? 'onUnFollow' : 'onFollow', data.id)
+          "
+          >{{ data.following.status ? "Unfollow" : "Follow" }}</myButton
+        >
       </div>
       <template v-if="active">
         <button
@@ -68,7 +77,7 @@ export default {
     spinner,
     placeholder
   },
-  emits: ['onPrevSlide', 'onNextSlide', 'onProgressFinish'],
+  emits: ['onPrevSlide', 'onNextSlide', 'onProgressFinish', 'onFollow'],
   props: {
     active: Boolean,
     loading: Boolean,

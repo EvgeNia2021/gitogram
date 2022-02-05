@@ -2,9 +2,7 @@ import * as api from '../../api'
 
 export default {
   namespaced: true,
-  state: {
-    user: null
-  },
+  state: {},
   mutations: {
     SET_USER (state, payload) {
       payload.isFollowing = false
@@ -12,10 +10,10 @@ export default {
     }
   },
   actions: {
-    checkUser () {
+    getAuthCode () {
       api.auth.getCode()
     },
-    async exchangeForToken (store, code) {
+    async authByCode (store, code) {
       const { data } = await api.auth.getToken(code)
       return data.token
     },
@@ -25,9 +23,7 @@ export default {
         commit('SET_USER', data)
         return data
       } catch (error) {
-        if (error.response.status === 401) {
-          console.log('Необходимо авторизоваться')
-        }
+        console.log('Unauthorized user')
       }
     }
   }

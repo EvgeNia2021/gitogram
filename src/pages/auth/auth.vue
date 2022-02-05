@@ -9,16 +9,16 @@
           <div class="auth__motto">
             More than just one repository. This is our digital world.
           </div>
-          <button @click="getUser" class="auth__btn">
+          <button @click="getAuthCode" class="auth__btn">
             <myButton>
               <span class="btn__txt">Authorize with github</span>
               <span class="btn__logo"><icon name="githubLogo" /></span>
             </myButton>
           </button>
-          </div>
-          <div class="auth__pic">
-            <img src="../../miscellaneous/authPagePic.png" alt="">
-          </div>
+        </div>
+        <div class="auth__pic">
+          <img src="../../miscellaneous/authPagePic.png" alt="" />
+        </div>
       </div>
     </div>
     <div class="auth__footer">
@@ -30,12 +30,34 @@
 <script>
 import { icon } from '../../icons'
 import { myButton } from '../../components/button'
-// import { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
     icon,
     myButton
+  },
+  methods: {
+    ...mapActions({
+      getAuthCode: 'auth/getAuthCode',
+      authByCode: 'auth/authByCode',
+      getUser: 'auth/getUser'
+    })
+  },
+  async created () {
+    const code = new URLSearchParams(window.location.search).get('code')
+
+    if (code !== null) {
+      const token = await this.authByCode(code)
+      localStorage.setItem('token', token)
+    } else {
+      return
+    }
+    const user = await this.getUser()
+
+    if (user) {
+      this.$router.replace({ name: 'Feeds' })
+    }
   }
 }
 </script>

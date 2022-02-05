@@ -10,14 +10,32 @@ export default {
   },
   mutations: {
     SET_TRENDINGS: (state, trendings) => {
-      // console.log(trendings)
-      console.log(trendings)
+      // console.log(trendings.trendings)
+      // state.data = trendings.trendings.map((item) => {
+      //   item.following = {
+      //     status: false,
+      //     loading: false,
+      //     error: ''
+      //   }
+      //   return item
+      // })
       state.data = trendings
     },
     SET_README: (state, payload) => {
       state.data.trendings = state.data.trendings.map((repo) => {
         if (payload.id === repo.id) {
           repo.readme = payload.content
+        }
+        return repo
+      })
+    },
+    SET_FOLLOWING: (state, payload) => {
+      state.data.trendings = state.data.trendings.map((repo) => {
+        if (payload.id === repo.id) {
+          repo.following = {
+            ...repo.following,
+            ...payload.data
+          }
         }
         return repo
       })
@@ -30,7 +48,7 @@ export default {
         const { data } = await api.trendings.getTrendings()
         commit('SET_TRENDINGS',
           {
-          // starred: rootState.starred.data,
+            // starred: rootState.starred.data,
             trendings: data.items
           }
         )
@@ -47,6 +65,80 @@ export default {
         commit('SET_README', { id, content: data })
       } catch (e) {
         alert('Something went wrong')
+      }
+    },
+    async starRepo ({ commit, getters }, id) {
+      commit('SET_FOLLOWING', {
+        id,
+        data: {
+          status: false,
+          loading: true,
+          error: ''
+        }
+      })
+      const { name: repo, owner } = getters.getRepoById(id)
+      try {
+        await api.starred.starRepo({ owner: owner.login, repo })
+        commit('SET_FOLLOWING', {
+          id,
+          data: {
+            status: true,
+            loading: false,
+            error: ''
+          }
+        })
+      } catch (e) {
+        commit('SET_FOLLOWING', {
+          id,
+          data: {
+            status: false,
+            error: ''
+          }
+        })
+      } finally {
+        commit('SET_FOLLOWING', {
+          id,
+          data: {
+            loading: false
+          }
+        })
+      }
+    },
+    async unStarRepo ({ commit, getters }, id) {
+      commit('SET_FOLLOWING', {
+        id,
+        data: {
+          status: true,
+          loading: true,
+          error: ''
+        }
+      })
+      const { name: repo, owner } = getters.getRepoById(id)
+      try {
+        await api.starred.unStarRepo({ owner: owner.login, repo })
+        commit('SET_FOLLOWING', {
+          id,
+          data: {
+            status: false,
+            loading: false,
+            error: ''
+          }
+        })
+      } catch (e) {
+        commit('SET_FOLLOWING', {
+          id,
+          data: {
+            status: false,
+            error: ''
+          }
+        })
+      } finally {
+        commit('SET_FOLLOWING', {
+          id,
+          data: {
+            loading: false
+          }
+        })
       }
     }
   }

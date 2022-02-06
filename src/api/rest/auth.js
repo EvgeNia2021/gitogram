@@ -14,8 +14,8 @@ export const getCode = () => {
 
 export const getToken = (code) => {
   return makeRequest({
-    url: 'http://localhost:8080/',
-    method: 'post',
+    url: 'https://webdev-api.loftschool.com/github',
+    method: 'POST',
     data: {
       clientId: env.clientId,
       clientSecret: env.clientSecret,

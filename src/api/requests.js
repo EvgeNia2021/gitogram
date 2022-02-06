@@ -4,16 +4,14 @@ const baseURL = 'https://api.github.com'
 
 export const makeRequest = ({
   url, method = 'get', data = {}, headers = {}
-}) => {
-  const token = localStorage.getItem('token')
-  return axios({
-    url,
-    method,
-    data,
-    baseURL,
+}) => axios({
+  url,
+  method,
+  data,
+  baseURL,
+  headers: {
     headers: {
-      ...headers,
-      Authorization: `token ${token}`
+      Authorization: `token ${localStorage.getItem('token')}`
     }
-  })
-}
+  }
+})

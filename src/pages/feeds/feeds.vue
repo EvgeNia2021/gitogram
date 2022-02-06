@@ -3,17 +3,17 @@
     <headerBar>
       <template #header>
         <div class="logo"><icon name="logo" /></div>
-        <div class="header-icons">
-          <div class="home">
+        <nav class="header-icons">
+          <button class="home" @click="$router.push({ name: 'Feeds' })">
             <icon name="home" />
-          </div>
-          <div class="header-avatar">
+          </button>
+          <button class="header-avatar" @click="$router.push({ name: 'Repos' })">
             <avatar :size="size" />
-          </div>
-          <div class="logout">
+          </button>
+          <button class="logout" @click="exit">
             <icon name="logout" />
-          </div>
-        </div>
+          </button>
+        </nav>
       </template>
       <template #content>
         <ul class="users-list">
@@ -101,7 +101,8 @@ export default {
   methods: {
     ...mapActions({
       fetchTrendings: 'trendings/fetchTrendings',
-      fetchReadme: 'trendings/fetchReadme'
+      fetchReadme: 'trendings/fetchReadme',
+      getUser: 'auth/getUser'
     }),
     getFeedData (item) {
       return {
@@ -112,6 +113,11 @@ export default {
         username: item.owner.login,
         avatar: item.owner.avatar_url
       }
+    }
+  },
+  async created () {
+    if (this.user === null) {
+      await this.getUser()
     }
   },
   async mounted () {

@@ -7,10 +7,13 @@
           <button class="home" @click="$router.push({ name: 'Feeds' })">
             <icon name="home" />
           </button>
-          <button class="header-avatar" @click="$router.push({ name: 'Repos' })">
-            <avatar :size="size" />
+          <button
+            class="header-avatar"
+            @click="$router.push({ name: 'Repos' })"
+          >
+            <avatar v-if="user" :userAvatar="user.avatar_url" />
           </button>
-          <button class="logout" @click="exit">
+          <button class="logout" @click="logout">
             <icon name="logout" />
           </button>
         </nav>
@@ -25,7 +28,11 @@
                 $router.push({ name: 'Stories', params: { initialSlide: id } })
               "
             /> -->
-          <li class="users-list" v-for="item in trendings" :key="item.id">
+          <li
+            class="users-list"
+            v-for="item in getUnstarredOnly"
+            :key="item.id"
+          >
             <userList
               :src="item.owner?.avatar_url"
               :username="item.owner?.login"
@@ -52,6 +59,10 @@
           :description="item.description"
           :stars="item.stargazers_count"
           :forks="item.forks_count"
+          @fetchIssues="fetchIssues({
+                id: item.id,
+                owner: item.owner.login,
+                repo: item.name })"
         />
       </li>
     </ul>
@@ -66,7 +77,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 
 import { headerBar } from '../../components/header-bar'
 import { userList } from '../../components/userList'
@@ -89,8 +100,12 @@ export default {
   },
   computed: {
     ...mapState({
-      trendings: (state) => state.trendings.data.trendings
-    })
+      trendings: (state) => state.trendings.data.trendings,
+      starred: (state) => state.starred.data,
+      user: (state) => state.auth.user
+      // starred: (state) => state.starred.starred
+    }),
+    ...mapGetters(['getUnstarredOnly'])
   },
   // data () {
   //   return {
@@ -102,7 +117,10 @@ export default {
     ...mapActions({
       fetchTrendings: 'trendings/fetchTrendings',
       fetchReadme: 'trendings/fetchReadme',
-      getUser: 'auth/getUser'
+      getUser: 'auth/getUser',
+      logout: 'auth/logout',
+      fetchStarred: 'starred/fetchStarred',
+      fetchIssues: 'starred/fetchIssues'
     }),
     getFeedData (item) {
       return {
@@ -123,6 +141,7 @@ export default {
   async mounted () {
     try {
       await this.fetchTrendings()
+      await this.fetchStarred()
       // const { data } = await api.trendings.getTrendings()
       // this.items = data.items
     } catch (error) {

@@ -9,33 +9,72 @@ export default {
     getStarredById: (state) => (id) => state.starred.find((item) => item.id === id)
   },
   mutations: {
-    SET_STARRED (state, payload) {
-      state.starred = payload
+    SET_STARRED(state, trendings) {
+      state.data.trendings = trendings.trendings.map(item => {
+        item.issues = {
+          data: null,
+          loading: false,
+          error: ''
+        }
+        return item
+      })
     },
-    ADD_STAR (state, payload) {
-      state.starred.unshift(payload)
-    },
-    REMOVE_STAR (state, payload) {
-      const ndxToDelete = state.starred.indexOf(payload)
-      state.starred.splice(ndxToDelete, 1)
+    SET_ISSUES: (state, payload) => {
+      state.data.trendings = state.data.trendings.map((repo) => {
+        if (payload.id === repo.id) {
+          repo.issues = {
+            ...repo.issues,
+            ...payload.data
+          }
+        }
+        return repo
+      })
     }
   },
   actions: {
-    async getStarred ({ commit }) {
+    async fetchStarred({ commit }) {
       try {
-        const { data } = await api.starred.getStarred()
+        const { data } = await api.starred.getStarredRepos()
         commit('SET_STARRED', data)
-      } catch (error) {
-        console.log(error)
+      } catch (e) {
+        console.log(e)
       }
     },
-    async unFollow ({ commit, getters }, id) {
-      const repo = getters.getStarredById(id)
+    async assignIssues({ commit, getters }, repoId) {
+      commit('SET_ISSUES', {
+        id: repoId,
+        data: {
+          loading: true,
+          error: ''
+        }
+      })
       try {
-        await api.starred.unStarRepo({ owner: repo.owner.login, repo: repo.name })
-        commit('REMOVE_STAR', repo)
+        const curRep = getters.getRepoById(repoId)
+        if (curRep.issues.data !== null) return
+
+        const { data } = await api.issues.fetchIssues({ owner: curRep.owner.login, repo: curRep.name })
+        commit('SET_ISSUES', {
+          id: repoId,
+          data: {
+            data: data
+          }
+        })
       } catch (error) {
+        commit('SET_ISSUES', {
+          id: repoId,
+          data: {
+            loading: false,
+            error: ''
+          }
+        })
         console.log(error)
+      } finally {
+        commit('SET_ISSUES', {
+          id: repoId,
+          data: {
+            loading: false
+          }
+        })
       }
     }
   }

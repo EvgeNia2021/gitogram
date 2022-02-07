@@ -9,7 +9,7 @@
           <div class="auth__motto">
             More than just one repository. This is our digital world.
           </div>
-          <button @click="getAuthCode" class="auth__btn">
+          <button @click="getCode" class="auth__btn">
             <myButton>
               <span class="btn__txt">Authorize with github</span>
               <span class="btn__logo"><icon name="githubLogo" /></span>
@@ -31,6 +31,8 @@
 import { icon } from '../../icons'
 import { myButton } from '../../components/button'
 import { mapActions } from 'vuex'
+import axios from 'axios'
+import env from '../../../env'
 
 export default {
   components: {
@@ -42,21 +44,30 @@ export default {
       getAuthCode: 'auth/getAuthCode',
       authByCode: 'auth/authByCode',
       getUser: 'auth/getUser'
-    })
+    }),
+    getCode () {
+      const githubAuthApi = 'https://github.com/login/oauth/authorize'
+
+      const params = new URLSearchParams()
+
+      params.append('client_id', env.clientId)
+      params.append('scope', 'repo:status public_repo read:user')
+
+      window.location.href = `${githubAuthApi}?${params}`
+    }
   },
   async created () {
     const code = new URLSearchParams(window.location.search).get('code')
 
-    if (code !== null) {
-      const token = await this.authByCode(code)
-      localStorage.setItem('token', token)
-    } else {
-      return
-    }
-    const user = await this.getUser()
-
-    if (user) {
-      this.$router.replace({ name: 'Feeds' })
+    if (code) {
+      try {
+        const token = await this.authByCode(code)
+        localStorage.setItem('token', token)
+        axios.defaults.headers.Authorization = `token ${token}`
+        this.$router.push({ name: 'Feeds' })
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }

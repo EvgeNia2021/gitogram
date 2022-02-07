@@ -11,15 +11,15 @@ export default {
   mutations: {
     SET_TRENDINGS: (state, trendings) => {
       // console.log(trendings.trendings)
-      // state.data = trendings.trendings.map((item) => {
-      //   item.following = {
-      //     status: false,
-      //     loading: false,
-      //     error: ''
-      //   }
-      //   return item
-      // })
-      state.data = trendings
+      state.data.trendings = trendings.trendings.map((item) => {
+        item.following = {
+          status: false,
+          loading: false,
+          error: ''
+        }
+        return item
+      })
+      // state.data = trendings
     },
     SET_README: (state, payload) => {
       state.data.trendings = state.data.trendings.map((repo) => {
@@ -48,7 +48,7 @@ export default {
         const { data } = await api.trendings.getTrendings()
         commit('SET_TRENDINGS',
           {
-            // starred: rootState.starred.data,
+            starred: rootState.starred.data,
             trendings: data.items
           }
         )
@@ -82,9 +82,7 @@ export default {
         commit('SET_FOLLOWING', {
           id,
           data: {
-            status: true,
-            loading: false,
-            error: ''
+            status: true
           }
         })
       } catch (e) {

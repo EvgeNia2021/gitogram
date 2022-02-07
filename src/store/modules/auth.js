@@ -17,6 +17,10 @@ export default {
       const { data } = await api.auth.getToken(code)
       return data.token
     },
+    async logout () {
+      localStorage.removeItem('token')
+      window.location.reload()
+    },
     async getUser ({ commit }) {
       try {
         const { data } = await api.auth.getUserData()

@@ -8,21 +8,13 @@ const router = createRouter({
 })
 router.beforeEach(async (to, from, next) => {
   const authRoute = to.name === 'Auth'
-  if (authRoute) {
-    next()
-    return
-  }
+
   try {
-    const response = await api.auth.getUserData()
-    if (response.status === 401) throw new Error()
-    next()
-  } catch (error) {
-    next({ name: 'Auth ' })
+    await api.auth.getUserData()
+    next(authRoute ? { name: 'Feeds' } : null)
+  } catch (e) {
+    next(authRoute ? null : { name: 'Auth' })
   }
 })
 
 export default router
-// export default createRouter({
-//   history: createWebHashHistory(),
-//   routes
-// })

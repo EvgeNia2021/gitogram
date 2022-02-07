@@ -1,5 +1,5 @@
 <template>
-  <button :class="['button', {'hover-text': withHoverText}]"
+  <button :class="['button', `${theme}`, {'hover-text': withHoverText}]"
 :data-hover-text="hoverText">
     <!-- <span class="button-text"> -->
     <slot></slot>
@@ -14,6 +14,10 @@ export default {
     hoverText: {
       type: String
 
+    },
+    theme: {
+      type: String,
+      required: true
     }
   },
   computed: {

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['spinner']">
+  <div :class="['spinner', { smallBtn }]">
     <icon name="spinnerIcon" />
   </div>
 </template>
@@ -7,7 +7,10 @@
 <script>
 import { icon } from '../../icons'
 export default {
-  components: { icon }
+  components: { icon },
+  props: {
+    smallBtn: Boolean
+  }
 }
 </script>
 

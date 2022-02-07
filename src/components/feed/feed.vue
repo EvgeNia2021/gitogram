@@ -13,32 +13,39 @@
       </div>
     </template>
   </repoCard>
-  <toggler @onToggle="toggle" />
+  <div class="issues">
+    <issues :issues="issues" @loadIssues="$emit('fetchIssues')" />
+  </div>
+  <!-- <toggler @onToggle="toggle" />
   <div class="comments" v-if="shown">
     <ul class="comments-list">
-      <li class="comments-item" v-for="n in 5" :key="n">
-        <comment text="Something clever" username="Jane Doe" />
+      <li class="comments-item" v-for="issue in issues" :key="issue.id">
+        <comment  :username="issue.user?.login"
+          :text="issue.body"
+          :empty="issue.no_issue" />
       </li>
-    </ul>
-  </div>
+    </ul> -->
+  <!-- </div> -->
 
   <div class="date">random date</div>
 </template>
 
 <script>
-import { comment } from '../comment'
-import { toggler } from '../toggler'
+// import { comment } from '../comment'
+// import { toggler } from '../toggler'
+import { issues } from '../issues'
 import { repoCard } from '../repo-card'
 import { user } from '../user'
-import { data } from '../../pages/feeds'
+// import { data } from '../../pages/feeds'
 import { controls } from '../controls'
 
 export default {
   name: 'feed-item',
   components: {
-    toggler,
-    comment,
+    // toggler,
+    // comment,
     user,
+    issues,
     controls,
     repoCard
   },
@@ -48,9 +55,13 @@ export default {
       posts: []
     }
   },
+  emits: ['fetchIssues'],
   methods: {
     toggle (isOpened) {
       this.shown = isOpened
+      if (isOpened && this.issues.length === 0) {
+        this.$emit('loadIssues')
+      }
     }
   },
   props: {
@@ -77,10 +88,15 @@ export default {
     description: {
       type: String
     },
-    created () {
-      this.posts = data
+    issues: {
+      type: Array,
+      required: true
     }
   }
+  //   created () {
+  //     this.posts = data
+  //   }
+  // }
 }
 </script>
 

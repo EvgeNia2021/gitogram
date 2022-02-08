@@ -11,7 +11,7 @@
             class="header-avatar"
             @click="$router.push({ name: 'Repos' })"
           >
-            <avatar v-if="user" :avatar="user.avatar_url" />
+            <avatar v-if="user" :src="user.avatar_url" />
           </button>
           <button class="logout" @click="logout">
             <icon name="logout" />

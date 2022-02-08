@@ -25,6 +25,7 @@ export default {
       state.data.trendings = state.data.trendings.map((repo) => {
         if (payload.id === repo.id) {
           repo.readme = payload.content
+          console.log(repo.readme)
         }
         return repo
       })

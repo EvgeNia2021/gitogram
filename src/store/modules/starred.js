@@ -6,11 +6,11 @@ export default {
     starred: null
   },
   getters: {
-    getStarredById: (state) => (id) => state.starred.find((item) => item.id === id)
+    getRepoById: (state) => (id) => state.starred.find((item) => item.id === id)
   },
   mutations: {
-    SET_STARRED(state, trendings) {
-      state.data.trendings = trendings.trendings.map(item => {
+    SET_STARRED (state, payload) {
+      state.data.trendings = state.data.trendings.map(item => {
         item.issues = {
           data: null,
           loading: false,
@@ -32,15 +32,15 @@ export default {
     }
   },
   actions: {
-    async fetchStarred({ commit }) {
+    async fetchStarred ({ commit }, { limit }) {
       try {
-        const { data } = await api.starred.getStarredRepos()
+        const { data } = await api.starred.getStarredRepos({ limit })
         commit('SET_STARRED', data)
       } catch (e) {
         console.log(e)
       }
     },
-    async assignIssues({ commit, getters }, repoId) {
+    async fetchIssues ({ commit, getters }, repoId) {
       commit('SET_ISSUES', {
         id: repoId,
         data: {

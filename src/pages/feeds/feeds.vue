@@ -11,7 +11,7 @@
             class="header-avatar"
             @click="$router.push({ name: 'Repos' })"
           >
-            <avatar v-if="user" :userAvatar="user.avatar_url" />
+            <avatar v-if="user" :avatar="user.avatar_url" />
           </button>
           <button class="logout" @click="logout">
             <icon name="logout" />
@@ -59,6 +59,7 @@
           :description="item.description"
           :stars="item.stargazers_count"
           :forks="item.forks_count"
+          :issues="item.issues ? item.issues : []"
           @fetchIssues="fetchIssues({
                 id: item.id,
                 owner: item.owner.login,
@@ -103,7 +104,6 @@ export default {
       trendings: (state) => state.trendings.data.trendings,
       starred: (state) => state.starred.data,
       user: (state) => state.auth.user
-      // starred: (state) => state.starred.starred
     }),
     ...mapGetters(['getUnstarredOnly'])
   },
@@ -141,7 +141,7 @@ export default {
   async mounted () {
     try {
       await this.fetchTrendings()
-      await this.fetchStarred()
+      await this.fetchStarred({ limit: 10 })
       // const { data } = await api.trendings.getTrendings()
       // this.items = data.items
     } catch (error) {

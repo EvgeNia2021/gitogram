@@ -22,7 +22,7 @@
       <li class="comments-item" v-for="issue in issues" :key="issue.id">
         <comment  :username="issue.user?.login"
           :text="issue.body"
-          :empty="issue.no_issue" />
+     />
       </li>
     </ul> -->
   <!-- </div> -->
@@ -49,21 +49,21 @@ export default {
     controls,
     repoCard
   },
-  data () {
-    return {
-      shown: false,
-      posts: []
-    }
-  },
+  // data () {
+  //   return {
+  //     shown: false,
+  //     posts: []
+  //   }
+  // },
   emits: ['fetchIssues'],
-  methods: {
-    toggle (isOpened) {
-      this.shown = isOpened
-      if (isOpened && this.issues.length === 0) {
-        this.$emit('loadIssues')
-      }
-    }
-  },
+  // methods: {
+  //   toggle (isOpened) {
+  //     this.shown = isOpened
+  //     if (isOpened && this.issues.length === 0) {
+  //       this.$emit('loadIssues')
+  //     }
+  //   }
+  // },
   props: {
     username: {
       type: String,

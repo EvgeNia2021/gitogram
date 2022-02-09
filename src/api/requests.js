@@ -13,5 +13,6 @@ export const makeRequest = ({
   url,
   method,
   data,
-  baseURL
+  baseURL,
+  headers
 })

@@ -2,12 +2,8 @@
   <div class="toggler">
     <toggler @toggle="toggle" />
   </div>
-  <div class="comments" v-if="shown">
-     <div class="loader" v-if="loading">
-          <spinner />
-        </div>
-        <div class="comments__content" v-else>
-    <ul class="comments__list" v-if="issues && issues.length && shown">
+  <div class="comments" v-if="issues && issues.length && shown">
+    <ul class="comments__list" >
       <li class="comments__item" v-for="issue in issues" :key="issue.id">
         <comment
           :username="issue.user?.login"
@@ -15,8 +11,7 @@
         />
       </li>
     </ul>
-        <placeholder v-else :paragraphs="2" />
-    </div>
+    <placeholder v-if="shown && loading" :paragraphs="3"></placeholder>
   </div>
 </template>
 
@@ -24,14 +19,12 @@
 
 import { toggler } from '../toggler'
 import { comment } from '../comment'
-import { spinner } from '../spinner'
 import { placeholder } from '../placeholder'
 
 export default {
   components: {
     toggler,
     comment,
-    spinner,
     placeholder
   },
   data () {

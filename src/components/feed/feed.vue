@@ -16,45 +16,48 @@
   <div class="issues">
     <issues :issues="issues" @loadIssues="$emit('fetchIssues')" />
   </div>
-  <!-- <toggler @onToggle="toggle" />
-  <div class="comments" v-if="shown">
-    <ul class="comments-list">
+  <!-- <toggler @onToggle="toggle" @loadIssues="$emit('fetchIssues')" />
+  <div class="comments" :issues="issues">
+    <ul class="comments-list" v-if="issues && issues.length && shown">
       <li class="comments-item" v-for="issue in issues" :key="issue.id">
-        <comment  :username="issue.user?.login"
-          :text="issue.body"
-     />
-      </li>
-    </ul> -->
-  <!-- </div> -->
-
-  <div class="date">random date</div>
+        <comment />
+       :username="issue.user.login"
+         :text="issue.body"
+       </li>
+     </ul>
+  </div> -->
+  <div class="date">{{ getFormattedDate }}</div>
 </template>
 
 <script>
-// import { comment } from '../comment'
-// import { toggler } from '../toggler'
+
 import { issues } from '../issues'
 import { repoCard } from '../repo-card'
 import { user } from '../user'
-// import { data } from '../../pages/feeds'
 import { controls } from '../controls'
+import { months } from '../../helpers/months'
+// import { comment } from '../comment'
+// import { toggler } from '../toggler'
+// import { placeholder } from '../placeholder'
+// import { data } from '../../pages/feeds'
 
 export default {
   name: 'feed-item',
   components: {
-    // toggler,
-    // comment,
     user,
     issues,
     controls,
     repoCard
+    // placeholder
+    // toggler,
+    // comment,
   },
-  // data () {
-  //   return {
-  //     shown: false,
-  //     posts: []
-  //   }
-  // },
+  data () {
+    return {
+      shown: false
+      // posts: []
+    }
+  },
   emits: ['fetchIssues'],
   // methods: {
   //   toggle (isOpened) {
@@ -91,6 +94,20 @@ export default {
     issues: {
       type: Array,
       required: true
+    },
+    loading: {
+      type: Boolean
+    },
+    repoDate: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    getFormattedDate () {
+      const date = this.repoDate.split(/-|T/).splice(0, 3).reverse()
+      const getFormattedDate = `${date[0].replace(/^0+/, '')} ${months[date[1] - 1]}`
+      return getFormattedDate
     }
   }
   //   created () {

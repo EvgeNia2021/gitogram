@@ -2,7 +2,9 @@ import * as api from '../../api'
 
 export default {
   namespaced: true,
-  state: {},
+  state: {
+    user: null
+  },
   mutations: {
     SET_USER (state, payload) {
       payload.isFollowing = false

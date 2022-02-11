@@ -2,14 +2,14 @@
   <div class="header-bar">
     <headerBar>
       <template #header>
-        <div class="logo"><icon name="logo" /></div>
+        <button class="logo" @click="$router.push({ name: 'Feeds' })"><icon name="logo" /></button>
         <nav class="header-icons">
           <button class="home" @click="$router.push({ name: 'Feeds' })">
             <icon name="home" />
           </button>
           <button
             class="header-avatar"
-            @click="$router.push({ name: 'Repos' })"
+            @click="$router.push({ name: 'User' })"
           >
             <avatar v-if="user" :avatar="user.avatar_url" />
           </button>
@@ -50,9 +50,8 @@
   </div>
   <div class="comment-section">
     <ul class="c-feed">
-      <li class="c-feed-item" v-for="item in trendings" :key="item.id">
+      <li class="c-feed-item" v-for="item in starred" :key="item.id">
         <feed
-          :feed="getFeedData(item)"
           :username="item.owner?.login"
           :src="item.owner?.avatar_url"
           :title="item.name"
@@ -63,7 +62,7 @@
           :issues="item.issues ? item.issues : []"
           @fetchIssues="fetchIssues({
                 id: item.id,
-                owner: item.owner.login,
+                owner: item.owner?.login,
                 repo: item.name })"
         />
       </li>
@@ -88,7 +87,7 @@ import { icon } from '../../icons'
 import { feed } from '../../components/feed'
 // import { sliderItem } from '../../components/slider-item'
 // import * as api from '../../api'
-import Avatar from '../../components/avatar/avatar.vue'
+import { avatar } from '../../components/avatar'
 
 export default {
   name: 'feeds',
@@ -98,12 +97,12 @@ export default {
     userList,
     feed,
     // sliderItem,
-    Avatar
+    avatar
   },
   computed: {
     ...mapState({
       trendings: (state) => state.trendings.data.trendings,
-      starred: (state) => state.starred.data,
+      starred: (state) => state.starred.starred,
       user: (state) => state.auth.user
     }),
     ...mapGetters(['getUnstarredOnly'])

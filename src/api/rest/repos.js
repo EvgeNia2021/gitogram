@@ -1,5 +1,5 @@
 import { makeRequest } from '../requests'
 
-export const getRepo = () => makeRequest({
+export const fetchRepos = () => makeRequest({
   url: 'user/repos'
 })

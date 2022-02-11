@@ -14,7 +14,7 @@
     </template>
   </repoCard>
   <div class="issues">
-    <issues :issues="issues" @loadIssues="$emit('fetchIssues')" />
+    <issues :issues="issues" />
   </div>
   <!-- <toggler @onToggle="toggle" @loadIssues="$emit('fetchIssues')" />
   <div class="comments" :issues="issues">
@@ -52,12 +52,12 @@ export default {
     // toggler,
     // comment,
   },
-  data () {
-    return {
-      shown: false
-      // posts: []
-    }
-  },
+  // data () {
+  //   return {
+  //     shown: false
+  //     // posts: []
+  //   }
+  // },
   emits: ['fetchIssues'],
   // methods: {
   //   toggle (isOpened) {

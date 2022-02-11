@@ -7,7 +7,7 @@ import user from './modules/user'
 export default createStore({
   getters: {
     getUnstarredOnly (state) {
-      return state.trendings.data.filter((trendingsRepo) => !state.starred.data.some((starredRepo) => trendingsRepo.id === starredRepo.id))
+      return state.trendings.data.trendings.filter((trendingsRepo) => !state.starred.starred.some((starredRepo) => trendingsRepo.id === starredRepo.id))
     }
   },
   modules: {

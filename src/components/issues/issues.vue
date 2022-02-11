@@ -1,18 +1,18 @@
 <template>
   <div class="toggler">
-    <toggler @toggle="toggle" />
+    <toggler @toggle="toggle" @click="$emit('fetchIssues')" />
   </div>
-  <div class="comments" v-if="issues && issues.length && shown">
+  <div class="comments" v-if="shown">
     <ul class="comments__list" >
       <li class="comments__item" v-for="issue in issues" :key="issue.id">
         <comment
-          :username="issue.user?.login"
-          :text="issue.body"
+          :issueUsername="issue.user?.login"
+          :issueText="issue.body"
         />
       </li>
     </ul>
-    <placeholder v-if="shown && loading" :paragraphs="3"></placeholder>
   </div>
+     <placeholder v-if="shown && loading" :paragraphs="2" />
 </template>
 
 <script>
@@ -35,9 +35,13 @@ export default {
   props: {
     loading: {
       type: Boolean
+    },
+    issues: {
+      type: Array,
+      required: true
     }
   },
-  emits: ['loadIssues'],
+  emits: ['fetchIssues'],
   methods: {
     toggle (isOpened) {
       this.shown = isOpened

@@ -13,7 +13,7 @@ export default {
   actions: {
     async fetchRepos ({ commit }) {
       try {
-        const { data } = await api.repos.getRepo()
+        const { data } = await api.repos.fetchRepos()
         commit('SET_REPOS', data)
       } catch (e) {
         console.log(e)

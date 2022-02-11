@@ -1,80 +1,58 @@
 import * as api from '../../api'
+// import trendings from './trendings'
 
 export default {
   namespaced: true,
   state: {
-    starred: null
-  },
-  getters: {
-    getRepoById: (state) => (id) => state.starred.find((item) => item.id === id)
+    starred: []
   },
   mutations: {
     SET_STARRED (state, payload) {
-      state.data.trendings = state.data.trendings.map(item => {
-        item.issues = {
-          data: null,
-          loading: false,
-          error: ''
-        }
-        return item
-      })
+      state.starred = payload
+      // .map(item => {
+      //   item.issues = {
+      //     data: null,
+      //     loading: false,
+      //     error: ''
+      //   }
+      //   return item
+      // })
+      // state.data.trendings = payload
     },
     SET_ISSUES: (state, payload) => {
-      state.data.trendings = state.data.trendings.map((repo) => {
-        if (payload.id === repo.id) {
-          repo.issues = {
-            ...repo.issues,
-            ...payload.data
-          }
+      state.starred = state.starred.map(item => {
+        if (payload.id === item.id) {
+          item.issues = payload.issues
         }
-        return repo
+        return item
       })
     }
   },
   actions: {
-    async fetchStarred ({ commit }, { limit }) {
+    async fetchStarred ({ commit }) {
       try {
-        const { data } = await api.starred.getStarredRepos({ limit })
+        const { data } = await api.starred.fetchStarred()
         commit('SET_STARRED', data)
       } catch (e) {
         console.log(e)
       }
     },
-    async fetchIssues ({ commit, getters }, repoId) {
-      commit('SET_ISSUES', {
-        id: repoId,
-        data: {
-          loading: true,
-          error: ''
-        }
-      })
+    async fetchIssues ({ commit }, { id, owner, repo }) {
       try {
-        const curRep = getters.getRepoById(repoId)
-        if (curRep.issues.data !== null) return
-
-        const { data } = await api.issues.fetchIssues({ owner: curRep.owner.login, repo: curRep.name })
-        commit('SET_ISSUES', {
-          id: repoId,
-          data: {
-            data: data
-          }
-        })
-      } catch (error) {
-        commit('SET_ISSUES', {
-          id: repoId,
-          data: {
-            loading: false,
-            error: ''
-          }
-        })
-        console.log(error)
-      } finally {
-        commit('SET_ISSUES', {
-          id: repoId,
-          data: {
-            loading: false
-          }
-        })
+        const { data } = await api.issues.fetchIssues({ owner, repo })
+        if (data.length !== 0) {
+          commit('SET_ISSUES', {
+            id,
+            issues: data
+          })
+        } else {
+          commit('SET_ISSUES', {
+            id,
+            issues: [{ no_issue: 'No issues yet' }]
+          })
+        }
+      } catch (e) {
+        console.log(e)
       }
     }
   }

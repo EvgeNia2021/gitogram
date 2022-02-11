@@ -1,0 +1,88 @@
+.profile-screen {
+  display: flex;
+  min-height: 70%;
+}
+
+.left-side {
+  padding-top: 40px; 
+  padding-right: 109px;
+  border-right: 1px solid #d3d3d3;
+  flex: 1;
+}
+.right-side {
+  margin-top: 40px;
+  margin-left: 74px;
+  flex-grow: 1;
+}
+
+.left-profile-links {
+  margin-top: 30px;
+}
+
+.user-component {
+  display: flex;
+  margin-top: 30px;
+}
+.user-pic {
+  width: 90px;
+  border-radius: 50%;
+  margin-right: 20px;
+  overflow: hidden;
+}
+.user-info {
+  font-size: 14px;
+  font-weight: 700;
+ 
+}
+.username {
+  font-weight: 100;
+  color: #9e9e9e;
+}
+
+.logo {
+  width: 175px;
+  color: #292929;
+}
+.home {
+  width: 24px;
+  margin-right: 28px;
+}
+.logout {
+  width: 25px;
+}
+
+.header-icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.header-avatar {
+  width: 37px;
+  height: 37px;
+  margin-right: 23px;
+}
+
+.title {
+  font-size: 26px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  display: flex;
+}
+
+.info__text {
+font-weight: 500;
+font-size: 12px;
+margin-right: 10px;
+}
+
+.info {
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-stats {
+  margin-right: 4px;
+}

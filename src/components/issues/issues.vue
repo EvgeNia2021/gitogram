@@ -1,23 +1,22 @@
 <template>
   <div class="toggler">
-    <toggler @toggle="toggle" />
+    <toggler @onToggle="toggle" />
   </div>
-  <div class="comments" v-if="shown">
-    <ul class="comments__list" >
+  <placeholder v-if="shown && loading" :paragraphs="2" />
+  <div class="comments" v-else>
+    <ul class="comments__list" v-if="shown">
       <li class="comments__item" v-for="issue in issues" :key="issue.id">
         <comment
           :issueUsername="issue.user?.login"
-          :issueText="issue.body"
+          :issueText="issue.title"
           :ifEmpty="issue.no_issue"
         />
       </li>
     </ul>
   </div>
-     <placeholder v-if="shown && loading" :paragraphs="2" />
 </template>
 
 <script>
-
 import { toggler } from '../toggler'
 import { comment } from '../comment'
 import { placeholder } from '../placeholder'

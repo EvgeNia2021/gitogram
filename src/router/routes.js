@@ -25,6 +25,7 @@ export default [
     path: '/user',
     name: 'User',
     component: user,
+    props: true,
     children: [
       {
         path: '',

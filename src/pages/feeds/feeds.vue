@@ -9,7 +9,7 @@
           </button>
           <button
             class="header-avatar"
-            @click="$router.push({ name: 'User' })"
+            @click="$router.push({ name: 'myRepos' })"
           >
             <avatar v-if="user" :avatar="user.avatar_url" />
           </button>
@@ -141,7 +141,7 @@ export default {
   async mounted () {
     try {
       await this.fetchTrendings()
-      await this.fetchStarred({ limit: 10 })
+      await this.fetchStarred()
     } catch (error) {
       alert('Something went wrong')
     }

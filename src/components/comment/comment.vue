@@ -3,7 +3,7 @@
     <p v-if="ifEmpty">
       <span>{{ ifEmpty }}</span>
     </p>
-    <p v-else>
+    <p v-else class="issues-container">
       <span class="issues-username">{{ issueUsername }}</span>
      <span class="issues-text">{{ issueText }}</span>
     </p>

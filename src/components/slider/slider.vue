@@ -4,7 +4,7 @@
       <ul class="stories" ref="item">
         <li
           class="stories-item"
-          v-for="(trending, ndx) in getUnstarredOnly"
+          v-for="(trending, ndx) in trendings"
           :key="trending.id"
         >
           <slider-item

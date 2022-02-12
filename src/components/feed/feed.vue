@@ -14,18 +14,8 @@
     </template>
   </repoCard>
   <div class="issues">
-    <issues :issues="issues" @loadIssues="$emit('fetchIssues')"/>
+    <issues :issues="issues" @loadIssues="$emit('fetchIssues')" />
   </div>
-  <!-- <toggler @onToggle="toggle" @loadIssues="$emit('fetchIssues')" />
-  <div class="comments" :issues="issues">
-    <ul class="comments-list" v-if="issues && issues.length && shown">
-      <li class="comments-item" v-for="issue in issues" :key="issue.id">
-        <comment />
-       :username="issue.user.login"
-         :text="issue.body"
-       </li>
-     </ul>
-  </div> -->
   <div class="date">{{ getFormattedDate }}</div>
 </template>
 
@@ -36,10 +26,6 @@ import { repoCard } from '../repo-card'
 import { user } from '../user'
 import { controls } from '../controls'
 import { months } from '../../helpers/months'
-// import { comment } from '../comment'
-// import { toggler } from '../toggler'
-// import { placeholder } from '../placeholder'
-// import { data } from '../../pages/feeds'
 
 export default {
   components: {

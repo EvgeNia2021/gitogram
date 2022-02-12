@@ -27,7 +27,6 @@ export default {
       state.data.trendings = state.data.trendings.map((repo) => {
         if (payload.id === repo.id) {
           repo.readme = payload.content
-          console.log(repo.readme)
         }
         return repo
       })
@@ -120,7 +119,6 @@ export default {
             theme: 'green'
           }
         })
-        // const { name: repo, owner } = getters.getRepoById(id)
         try {
           await api.starred.unStarRepo({ owner: repo.owner.login, repo: repo.name })
           commit('SET_FOLLOWING', {

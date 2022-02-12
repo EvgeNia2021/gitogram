@@ -31,8 +31,8 @@ export default {
       })
     },
     REMOVE_STAR (state, payload) {
-      const ndxToDelete = state.starred.indexOf(payload)
-      state.starred.splice(ndxToDelete, 1)
+      const itemToDelete = state.starred.indexOf(payload)
+      state.starred.splice(itemToDelete, 1)
     }
   },
   actions: {

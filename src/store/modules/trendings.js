@@ -142,7 +142,7 @@ export default {
           })
         }
       } else {
-        const getterFromStarred = rootGetters['starred/getStarredById']
+        const getterFromStarred = rootGetters['starred/getFollowedById']
         const repo = getterFromStarred(id)
 
         try {

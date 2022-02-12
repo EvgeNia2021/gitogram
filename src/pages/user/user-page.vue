@@ -32,7 +32,7 @@
           <div class="info">
              <div class="user-stats">{{ user.public_repos }}</div>
              <router-link :to="{ name: 'myRepos' }" class="info__text">repositories</router-link>
-             <div class="user-stats">{{ user.following }}</div>
+             <div class="user-stats">{{ starred.length }}</div>
              <router-link :to="{ name: 'myFollowing' }" class="info__text">following</router-link>
             </div>
           <div class="username">{{ user.name }}</div>
@@ -66,6 +66,7 @@ export default {
 
     const user = computed(() => state.auth.user)
     const repos = computed(() => state.user.repos)
+    const starred = computed(() => state.starred.starred)
 
     onMounted(() => {
       if (user.value === null) {
@@ -78,7 +79,8 @@ export default {
 
     return {
       user,
-      repos
+      repos,
+      starred
     }
   }
 }

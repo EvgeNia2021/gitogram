@@ -25,16 +25,15 @@ export default [
     path: '/user',
     name: 'User',
     component: user,
-    props: true,
     children: [
       {
-        name: 'myRepos',
         path: '',
+        name: 'myRepos',
         component: repos
       },
       {
-        name: 'myFollowing',
         path: 'following',
+        name: 'myFollowing',
         component: following
       }
     ]

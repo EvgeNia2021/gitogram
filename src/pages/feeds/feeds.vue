@@ -142,8 +142,6 @@ export default {
     try {
       await this.fetchTrendings()
       await this.fetchStarred({ limit: 10 })
-      // const { data } = await api.trendings.getTrendings()
-      // this.items = data.items
     } catch (error) {
       alert('Something went wrong')
     }

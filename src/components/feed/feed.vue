@@ -14,7 +14,7 @@
     </template>
   </repoCard>
   <div class="issues">
-    <issues :issues="issues" />
+    <issues :issues="issues" @loadIssues="$emit('fetchIssues')"/>
   </div>
   <!-- <toggler @onToggle="toggle" @loadIssues="$emit('fetchIssues')" />
   <div class="comments" :issues="issues">
@@ -42,7 +42,6 @@ import { months } from '../../helpers/months'
 // import { data } from '../../pages/feeds'
 
 export default {
-  name: 'feed-item',
   components: {
     user,
     issues,

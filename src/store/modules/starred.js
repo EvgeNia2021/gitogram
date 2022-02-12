@@ -1,10 +1,12 @@
 import * as api from '../../api'
-// import trendings from './trendings'
 
 export default {
   namespaced: true,
   state: {
     starred: []
+  },
+  getters: {
+    getFollowedById: (state) => (id) => state.starred.find((item) => item.id === id)
   },
   mutations: {
     SET_STARRED (state, payload) {
@@ -20,12 +22,17 @@ export default {
       // state.data.trendings = payload
     },
     SET_ISSUES: (state, payload) => {
+      console.log(payload)
       state.starred = state.starred.map(item => {
         if (payload.id === item.id) {
           item.issues = payload.issues
         }
         return item
       })
+    },
+    REMOVE_STAR (state, payload) {
+      const ndxToDelete = state.starred.indexOf(payload)
+      state.starred.splice(ndxToDelete, 1)
     }
   },
   actions: {
@@ -53,6 +60,15 @@ export default {
         }
       } catch (e) {
         console.log(e)
+      }
+    },
+    async unFollow ({ commit, getters }, id) {
+      const repo = getters.getFollowedById(id)
+      try {
+        await api.starred.unStarRepo({ owner: repo.owner.login, repo: repo.name })
+        commit('REMOVE_STAR', repo)
+      } catch (error) {
+        console.log(error)
       }
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="repo-content">
+  <div class="user-repo__content">
     <h2 class="title">{{ title }}</h2>
     <div class="info">
       <p v-if="description">
@@ -15,7 +15,6 @@
 <script>
 import { controls } from '../controls'
 export default {
-  name: 'userRepos',
   components: {
     controls
   },

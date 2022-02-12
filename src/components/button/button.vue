@@ -1,5 +1,5 @@
 <template>
-  <button :class="['button', `${theme}`, {'hover-text': withHoverText}]"
+  <button :class="['button', `${theme}`,`${size}`, {'hover-text': withHoverText}]"
 :data-hover-text="hoverText">
     <!-- <span class="button-text"> -->
     <slot></slot>
@@ -18,6 +18,9 @@ export default {
     theme: {
       type: String,
       required: true
+    },
+    size: {
+      type: String
     }
   },
   computed: {

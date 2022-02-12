@@ -1,6 +1,9 @@
 <template>
   <div class="c-comment">
-    <p>
+    <p v-if="ifEmpty">
+      <span>{{ ifEmpty }}</span>
+    </p>
+    <p v-else>
       <span class="issues-username">{{ issueUsername }}</span>
      <span class="issues-text">{{ issueText }}</span>
     </p>
@@ -10,16 +13,10 @@
 <script>
 
 export default {
-  name: 'Comment',
   props: {
-    issueUsername: {
-      type: String,
-      required: true
-    },
-    issueText: {
-      type: String,
-      required: true
-    }
+    issueUsername: String,
+    issueText: String,
+    ifEmpty: String
   }
 }
 </script>

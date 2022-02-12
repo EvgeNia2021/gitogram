@@ -1,6 +1,6 @@
 <template>
   <div class="toggler">
-    <toggler @toggle="toggle" @click="$emit('fetchIssues')" />
+    <toggler @toggle="toggle" />
   </div>
   <div class="comments" v-if="shown">
     <ul class="comments__list" >
@@ -8,6 +8,7 @@
         <comment
           :issueUsername="issue.user?.login"
           :issueText="issue.body"
+          :ifEmpty="issue.no_issue"
         />
       </li>
     </ul>
@@ -38,10 +39,10 @@ export default {
     },
     issues: {
       type: Array,
-      required: true
+      default: () => []
     }
   },
-  emits: ['fetchIssues'],
+  emits: ['loadIssues'],
   methods: {
     toggle (isOpened) {
       this.shown = isOpened

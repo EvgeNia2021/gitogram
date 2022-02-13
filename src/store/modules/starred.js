@@ -45,14 +45,13 @@ export default {
       }
     },
     async fetchIssues ({ commit }, { id, owner, repo }) {
-      // commit('SET_ISSUES', {
-      //   id,
-      //   data: {
-      //     loading: true,
-      //     error: ''
-      //   }
-      // })
-
+      commit('SET_ISSUES', {
+        id,
+        issues: {
+          loading: true,
+          error: ''
+        }
+      })
       try {
         const { data } = await api.issues.fetchIssues({ owner, repo })
         if (data.length !== 0) {
@@ -74,19 +73,10 @@ export default {
         commit('SET_ISSUES', {
           id,
           issues: {
-            loading: false,
             error: ''
           }
         })
         console.log(e)
-      // } finally {
-      //   commit('SET_ISSUES', {
-      //     id,
-      //     issues: {
-      //       loading: false
-      //     }
-      //   })
-      // }
       }
     },
     async unFollow ({ commit, getters }, id) {

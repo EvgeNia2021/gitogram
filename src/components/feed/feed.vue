@@ -79,7 +79,7 @@ export default {
       type: String
     },
     issues: {
-      type: Array,
+      type: Object,
       required: true
     },
     // loading: {

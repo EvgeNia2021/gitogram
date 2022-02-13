@@ -1,12 +1,12 @@
 <template>
-<div class="comments">
   <div class="toggler">
     <toggler @onToggle="toggle" />
   </div>
-  <div class="comments__placeholder" v-if="shown && loading">
+  <div class="comments" v-if="shown">
+  <div class="comments__placeholder" v-if="loading">
   <placeholder :paragraphs="2" />
   </div>
-    <ul class="comments__list" v-if="issues && issues.length && shown">
+    <ul class="comments__list" v-if="issues.length">
       <li class="comments__item" v-for="issue in issues" :key="issue.id">
         <comment
           :issueUsername="issue.user?.login"
@@ -36,7 +36,8 @@ export default {
   },
   props: {
     loading: {
-      type: Boolean
+      type: Boolean,
+      default: false
     },
     issues: {
       type: Array,

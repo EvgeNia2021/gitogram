@@ -1,10 +1,12 @@
 <template>
+<div class="comments">
   <div class="toggler">
     <toggler @onToggle="toggle" />
   </div>
-  <placeholder v-if="shown && loading" :paragraphs="2" />
-  <div class="comments" v-else>
-    <ul class="comments__list" v-if="shown">
+  <div class="comments__placeholder" v-if="shown && loading">
+  <placeholder :paragraphs="2" />
+  </div>
+    <ul class="comments__list" v-if="issues && issues.length && shown">
       <li class="comments__item" v-for="issue in issues" :key="issue.id">
         <comment
           :issueUsername="issue.user?.login"

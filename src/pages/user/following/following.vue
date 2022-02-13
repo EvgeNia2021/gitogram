@@ -24,7 +24,9 @@ import { followingItem } from '../../../components/following-item'
 
 export default {
   name: 'following',
-  components: { followingItem },
+  components: {
+    followingItem
+  },
 
   setup () {
     const { state, dispatch, commit } = useStore()

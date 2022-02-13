@@ -14,7 +14,8 @@
     </template>
   </repoCard>
   <div class="issues">
-    <issues :issues="issues" @loadIssues="$emit('fetchIssues')" />
+    <issues :issues="issues.data" @loadIssues="$emit('fetchIssues')" :loading="issues.loading" />
+    <!-- <pre>{{issues.data}}</pre> -->
   </div>
   <div class="date">{{ getFormattedDate }}</div>
 </template>
@@ -37,12 +38,13 @@ export default {
     // toggler,
     // comment,
   },
-  // data () {
-  //   return {
-  //     shown: false
-  //     // posts: []
-  //   }
-  // },
+  data () {
+    return {
+      // shown: false
+      // // posts: []
+      // loading: false
+    }
+  },
   emits: ['fetchIssues'],
   // methods: {
   //   toggle (isOpened) {
@@ -80,9 +82,9 @@ export default {
       type: Array,
       required: true
     },
-    loading: {
-      type: Boolean
-    },
+    // loading: {
+    //   type: Boolean
+    // },
     repoDate: {
       type: String,
       required: true

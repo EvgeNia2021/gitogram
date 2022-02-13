@@ -45,21 +45,48 @@ export default {
       }
     },
     async fetchIssues ({ commit }, { id, owner, repo }) {
+      // commit('SET_ISSUES', {
+      //   id,
+      //   data: {
+      //     loading: true,
+      //     error: ''
+      //   }
+      // })
+
       try {
         const { data } = await api.issues.fetchIssues({ owner, repo })
         if (data.length !== 0) {
           commit('SET_ISSUES', {
             id,
-            issues: data
+            issues: {
+              data,
+              error: ''
+            }
+            // issues: data
           })
         } else {
           commit('SET_ISSUES', {
             id,
-            issues: [{ no_issue: 'No issues yet' }]
+            issues: { data: [{ no_issue: 'No issues yet' }] }
           })
         }
       } catch (e) {
+        commit('SET_ISSUES', {
+          id,
+          issues: {
+            loading: false,
+            error: ''
+          }
+        })
         console.log(e)
+      // } finally {
+      //   commit('SET_ISSUES', {
+      //     id,
+      //     issues: {
+      //       loading: false
+      //     }
+      //   })
+      // }
       }
     },
     async unFollow ({ commit, getters }, id) {

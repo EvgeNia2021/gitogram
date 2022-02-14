@@ -1,8 +1,8 @@
 <template>
 <div class="toggler">
-  <button :class="['button', {'active': isOpened }]" @click="toggle">
-    <span class="text">{{ isOpened ? "Hide" : "View" }} issues</span>
-    <span class="toggler-icon">
+  <button :class="['toggler__button', {'active': isOpened }]" @click="toggle">
+    <span class="toggler__text">{{ isOpened ? "Hide" : "View" }} issues</span>
+    <span class="toggler__icon">
       <icon name="toggleArrow" />
     </span>
   </button>

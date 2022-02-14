@@ -22,6 +22,7 @@
 import { toggler } from '../toggler'
 import { comment } from '../comment'
 import { placeholder } from '../placeholder'
+import { ref } from 'vue'
 
 export default {
   components: {
@@ -29,11 +30,11 @@ export default {
     comment,
     placeholder
   },
-  data () {
-    return {
-      shown: false
-    }
-  },
+  // data () {
+  //   return {
+  //     shown: false
+  //   }
+  // },
   props: {
     loading: {
       type: Boolean,
@@ -45,13 +46,28 @@ export default {
     }
   },
   emits: ['loadIssues'],
-  methods: {
-    toggle (isOpened) {
-      this.shown = isOpened
+  // methods: {
+  //   toggle (isOpened) {
+  //     this.shown = isOpened
 
-      if (isOpened && this.issues.length === 0) {
-        this.$emit('loadIssues')
+  //     if (isOpened && this.issues.length === 0) {
+  //       this.$emit('loadIssues')
+  //     }
+  //   }
+  // }
+  setup (props, { emit }) {
+    const shown = ref(false)
+    const toggle = (isOpened) => {
+      shown.value = isOpened
+
+      if (isOpened && (!props.issues || props.issues.length === 0)) {
+        emit('loadIssues')
       }
+    }
+
+    return {
+      shown,
+      toggle
     }
   }
 }

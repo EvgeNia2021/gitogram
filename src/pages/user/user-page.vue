@@ -20,7 +20,7 @@
       </template>
   </headerBar>
   </div>
-  <div class="g-container profile-screen">
+  <div class="g-container profile-page">
     <div class="left-side">
       <h1 class="title">My profile</h1>
       <div class="user-component">

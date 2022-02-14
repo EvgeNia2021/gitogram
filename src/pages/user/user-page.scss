@@ -1,4 +1,4 @@
-.profile-screen {
+.profile-page {
   display: flex;
   min-height: 70%;
 }
@@ -16,9 +16,6 @@
   height: 100%;
 }
 
-.left-profile-links {
-  margin-top: 30px;
-}
 
 .user-component {
   display: flex;
@@ -94,11 +91,4 @@
 
 .user-stats {
   margin-right: 4px;
-}
-
-.loader {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
 }
